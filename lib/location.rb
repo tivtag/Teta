@@ -7,6 +7,14 @@ class Location
     @actions = {}
   end
 
+  def parent_location_name
+     if parent_location.nil? then
+       nil
+     else
+       parent_location.name
+     end
+  end
+
   def desc(text)
     @description = text
   end

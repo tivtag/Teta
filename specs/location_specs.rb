@@ -23,6 +23,10 @@ describe Location do
       @location.parent_location.should == nil
     end
 
+    it "does not know the name of the parent location" do
+      @location.parent_location_name.should == nil
+    end
+
     it "does not have any actions" do
       @location.has_action(:any).should == false
     end

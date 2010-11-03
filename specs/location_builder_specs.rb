@@ -51,5 +51,11 @@ describe LocationBuilder do
       names = @locations.map {|location| location.name}
       names.should include(:street, :park, :bank, :house, :door)
     end
+
+    it 'return Locations that are correctly connected to their parent Location' do
+       parent_hash = {:street => nil, :park => :street, :bank => :park, :house => :street, :door => :house}
+      
+       @locations.each {|location| location.should satisfy {|arg| parent_hash[location.name] == location.parent_location_name}}              
+    end
   end
 end
