@@ -1,33 +1,35 @@
 require_relative "../lib/location"
 
-describe Location, "when first created" do
+describe Location do
+  describe "when first created" do
 
-  before :each do
-    @location = Location.new
-  end
+    before :each do
+      @location = Location.new
+    end
   
-  it "should have no name" do
-    @location.name.should == nil
-  end
+    it "has no name" do
+      @location.name.should == nil
+    end
   
-  it "should have no description" do
-    @location.description.should == nil
-  end
+    it "has no description" do
+      @location.description.should == nil
+    end
 
-  it "should have no long name" do
-    @location.long_name.should == nil
-  end
+    it "has no long name" do
+      @location.long_name.should == nil
+    end
 
-  it "should have no parent location" do
-    @location.parent_location.should == nil
-  end
+    it "has no parent location" do
+      @location.parent_location.should == nil
+    end
 
-  it "should not have any actions" do
-    @location.has_action(:any).should == false
-  end
+    it "does not have any actions" do
+      @location.has_action(:any).should == false
+    end
 
-  it "should raise an error when evaluating any action" do
-    lambda { @location.eval_action(:any) }.should raise_error
+    it "raises an error when evaluating any action" do
+      lambda { @location.eval_action(:any) }.should raise_error
+    end
   end
 end
 
