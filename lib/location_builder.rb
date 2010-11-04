@@ -35,6 +35,7 @@ module LocationBuilder
   end
 
   def item(symbol)
+    current_obj.add_item symbol
   end
 
   def action(symbol, &block)

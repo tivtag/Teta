@@ -12,25 +12,28 @@ describe LocationBuilder do
     it 'returns a single Location' do
       @locations.length.should == 1
     end
+    
+    context 'returns a Location that has' do
 
-    it 'returns a Location that has the specified name' do
-      @location.name.should == :town
-    end
+      it 'the specified name' do
+        @location.name.should == :town
+      end
 
-    it 'returns a Location that has the specified long name' do
-      @location.long_name.should == 'Viva La Vegas'
-    end
+      it 'the specified long name' do
+        @location.long_name.should == 'Viva La Vegas'
+      end
 
-    it 'returns a Location that has the specified description' do
-      @location.description.should == 'A great town.'
-    end 
+      it 'the specified description' do
+        @location.description.should == 'A great town.'
+      end 
 
-    it 'returns a Location with no actions' do
-      @location.has_action(:any).should == false
-    end
+      it 'no actions' do
+        @location.has_action(:any).should == false
+      end
 
-    it 'returns a Location with no parent Location' do
-      @location.parent_location.should == nil
+      it 'no parent Location' do
+        @location.parent_location.should == nil
+      end
     end
 
     it 'still returns only a single Location' do
@@ -64,12 +67,15 @@ describe LocationBuilder do
       @location = parse('spec/data/location_with_item.rb').first
     end
   
-    it 'contains one Item' do
-      @location.items.should have(1).item
-    end
+    context 'returns a single Location that' do
+     
+      it 'contains one Item' do
+        @location.items.length == 1
+      end
  
-    it 'contains the described Item' do
-      @location.items[0].name == :coin
+      it 'contains the described Item' do
+        @location.items[0].name == :coin
+      end
     end
   end
 
