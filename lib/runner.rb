@@ -11,7 +11,9 @@ class Runner
    
   end
 
+private
   def step
+      print_step
       handle read_input
   end
 
@@ -33,4 +35,9 @@ class Runner
        true
      end
   end
+
+  def print_step
+    puts location.description
+  end
+
 end

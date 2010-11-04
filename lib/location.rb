@@ -1,5 +1,5 @@
 require 'json'
-require 'item_container'
+require_relative 'item_container'
 
 class Location
   include ItemContainer
