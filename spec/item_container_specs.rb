@@ -9,7 +9,7 @@ shared_examples_for 'an ItemContainer' do
     end
    
     it 'does not contain a specific Item' do
-      container.has_item(:potion).should be_false
+      container.has_item?(:potion).should be_false
     end   
  
     context 'after adding one Item' do
@@ -18,11 +18,11 @@ shared_examples_for 'an ItemContainer' do
       end
 
       it 'contains the added Item' do
-        container.has_item(:potion).should be_true
+        container.has_item?(:potion).should be_true
       end
 
       it "does not contain an Item that wasn't added" do
-        container.has_item(:water).should be_false
+        container.has_item?(:water).should be_false
       end
  
     end

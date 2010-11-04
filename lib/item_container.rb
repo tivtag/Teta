@@ -15,7 +15,7 @@ module ItemContainer
     item  
   end
   
-  def has_item(name)
+  def has_item?(name)
     find_item_by_name(name) != nil
   end
 
