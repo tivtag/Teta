@@ -1,10 +1,13 @@
 require 'json'
+require 'item_container'
 
 class Location
+  include ItemContainer
   attr_accessor :name, :long_name, :description, :parent_location
 
-  def initialize()
+  def initialize
     @actions = {}
+    super
   end
 
   def parent_location_name

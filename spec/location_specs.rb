@@ -1,8 +1,11 @@
-require_relative "../lib/location"
+require_relative '../lib/location'
+require_relative 'item_container_specs.rb'
 
 describe Location do
-  describe "when first created" do
+  it_behaves_like 'an ItemContainer'
 
+  describe "when first created" do
+    
     before :each do
       @location = Location.new
     end

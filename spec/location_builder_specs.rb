@@ -5,7 +5,7 @@ describe LocationBuilder do
  
   describe 'when parsing a single simple Location' do
     before do
-      @locations = parse('specs/data/simple_location.rb')
+      @locations = parse('spec/data/simple_location.rb')
       @location = @locations.first 
     end
 
@@ -40,7 +40,7 @@ describe LocationBuilder do
   
   describe 'when parsing hierarchical Locations' do
     before do
-      @locations = parse('specs/data/hierarchical_locations.rb')
+      @locations = parse('spec/data/hierarchical_locations.rb')
     end
 
     it 'returns the correct number of Locations' do
@@ -58,4 +58,19 @@ describe LocationBuilder do
        @locations.each {|location| location.should satisfy {|arg| parent_hash[location.name] == location.parent_location_name}}              
     end
   end
+
+  describe 'when parsing a Location that includes an Item' do
+    before do
+      @location = parse('spec/data/location_with_item.rb').first
+    end
+  
+    it 'contains one Item' do
+      @location.items.should have(1).item
+    end
+ 
+    it 'contains the described Item' do
+      @location.items[0].name == :coin
+    end
+  end
+
 end
