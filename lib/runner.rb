@@ -36,8 +36,9 @@ private
      end
   end
 
-  def print_step
-    puts location.description
+  def print_step   
+    text = location.description.gsub(/\n/, '').gsub(/ +/, ' ')
+    puts text
   end
 
 end
