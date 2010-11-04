@@ -14,7 +14,7 @@ location :long_road do
     item :old_coin
     action :search do
        take :old_coin
-       desc "A stack of various pre-war magazines."
+       desc "A mixed up stack of magazines."
     end
   end
  	
