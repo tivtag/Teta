@@ -5,7 +5,8 @@ class Runner
   attr_accessor :locations, :location
 
   def run
-  
+    print_location 
+ 
     while step do
     end
    
@@ -13,7 +14,6 @@ class Runner
 
 private
   def step
-      print_step
       handle read_input
   end
 
@@ -23,20 +23,32 @@ private
   end
 
   def handle(input)
-    if input == 'quit' then
+    action = input.intern
+
+    if action == :quit then
        false
-     else
-       action = input.intern
-       if location.has_action? action then
-         location.eval_action action
-       else
-         puts "I can't do that here."
-       end
-       true
-     end
+    else
+      if location.has_action? action then
+        location.eval_action action
+      else
+        puts "Huh..?"
+      end
+      true
+    end
   end
 
-  def print_step   
+  def handle_action(action)
+      if location.has_action? action then
+        location.eval_action action
+        true
+      else
+               
+
+        false
+      end
+  end
+
+  def print_location   
     text = location.description.gsub(/\n/, '').gsub(/ +/, ' ')
     puts text
   end
