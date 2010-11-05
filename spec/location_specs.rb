@@ -6,36 +6,22 @@ describe Location do
 
   describe "when first created" do
     
-    before :each do
-      @location = Location.new
-    end
-  
-    it "has no name" do
-      @location.name.should == nil
-    end
-  
-    it "has no description" do
-      @location.description.should == nil
-    end
+    let(:location) { Location.new }
+    subject { location }  
+   
+    its(:name)            { should be_nil }
+    its(:description)     { should be_nil }
+    its(:long_name)       { should be_nil }
+    its(:parent_location) { should be_nil }   
 
-    it "has no long name" do
-      @location.long_name.should == nil
-    end
-
-    it "has no parent location" do
-      @location.parent_location.should == nil
-    end
-
+    it { should_not have_action(:any) }
+    
     it "does not know the name of the parent location" do
-      @location.parent_location_name.should == nil
-    end
-
-    it "does not have any actions" do
-      @location.has_action?(:any).should == false
+      location.parent_location_name.should == nil
     end
 
     it "raises an error when evaluating any action" do
-      lambda { @location.eval_action(:any) }.should raise_error
+      lambda { location.eval_action(:any) }.should raise_error
     end
   end
 end

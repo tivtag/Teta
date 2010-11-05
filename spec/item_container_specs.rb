@@ -13,6 +13,7 @@ shared_examples_for 'an ItemContainer' do
     end   
  
     context 'after adding one Item' do
+
       before do
         container.add_item :potion
       end
