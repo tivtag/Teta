@@ -7,7 +7,7 @@ describe LocationBuilder do
      
     let(:data) do
        lambda do
-          location :town do
+         location :town do
             name 'Viva La Vegas'
             desc 'A great town.'
          end 
@@ -32,43 +32,70 @@ describe LocationBuilder do
       locations.length.should == 1
     end
   end
-  
+ 
   describe 'when parsing hierarchical Locations' do
-    before do
-      @locations = parse_file('spec/data/hierarchical_locations.rb')
+    let(:data) do
+      lambda do
+
+        location :street do
+          location :park do
+            location :bank do
+            end
+          end
+
+          location :house do
+            location :door do
+            end
+          end
+        end
+
+      end
     end
 
+    let(:locations) { parse(data) }
+
     it 'returns the correct number of Locations' do
-      @locations.length.should == 5
+      locations.length.should == 5
     end
 
     it 'returns the described Locations' do
-      names = @locations.map {|location| location.name}
+      names = locations.map {|location| location.name}
       names.should include(:street, :park, :bank, :house, :door)
     end
 
     it 'return Locations that are correctly connected to their parent Location' do
        parent_hash = {:street => nil, :park => :street, :bank => :park, :house => :street, :door => :house}
       
-       @locations.each {|location| location.should satisfy {|arg| parent_hash[location.name] == location.parent_location_name}}              
+       locations.each {|location| location.should satisfy {|arg| parent_hash[location.name] == location.parent_location_name}}              
     end
   end
-
-  describe 'when parsing a Location that includes an Item' do
-    before do
-      @location = parse_file('spec/data/location_with_item.rb').first
-    end
   
-    context 'returns a single Location that' do
-     
-      it 'contains one Item' do
-        @location.items.length == 1
-      end
- 
-      it 'contains the described Item' do
-        @location.items[0].name == :coin
+  describe 'when parsing a Location that includes an Item' do
+    let(:data) do
+      lambda do
+        
+        location :table do
+          item :coin
+
+          action :search do
+            take :coin
+          end
+        end
+
       end
     end
-  end
 
+    let(:loc) { parse(data).first }
+
+    it 'returns a Location that has one Item' do
+      loc.items.length == 1
+    end
+
+    context "then the item's" do
+      subject { loc.items[0] }
+
+      its(:name) { should == :coin }
+    end
+
+  end
 end
