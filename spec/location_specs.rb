@@ -31,7 +31,7 @@ describe Location do
     end
 
     it "does not have any actions" do
-      @location.has_action(:any).should == false
+      @location.has_action?(:any).should == false
     end
 
     it "raises an error when evaluating any action" do

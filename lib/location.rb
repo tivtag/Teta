@@ -30,7 +30,7 @@ class Location
     @actions[symbol] = block
   end
 
-  def has_action(symbol)
+  def has_action?(symbol)
     @actions.has_key? symbol
   end
 

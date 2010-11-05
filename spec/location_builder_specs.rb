@@ -4,46 +4,38 @@ include LocationBuilder
 describe LocationBuilder do
  
   describe 'when parsing a single simple Location' do
-    before do
-      @locations = parse('spec/data/simple_location.rb')
-      @location = @locations.first 
+     
+    let(:data) do
+       lambda do
+          location :town do
+            name 'Viva La Vegas'
+            desc 'A great town.'
+         end 
+       end
     end
 
+    let(:locations) { parse(data) }
+    subject { locations.first }
+ 
     it 'returns a single Location' do
-      @locations.length.should == 1
+      locations.length.should == 1
     end
     
-    context 'returns a Location that has' do
+    its(:name)            { should == :town }
+    its(:long_name)       { should == 'Viva La Vegas' }
+    its(:description)     { should == 'A great town.' }
+    its(:parent_location) { should be_nil }
 
-      it 'the specified name' do
-        @location.name.should == :town
-      end
-
-      it 'the specified long name' do
-        @location.long_name.should == 'Viva La Vegas'
-      end
-
-      it 'the specified description' do
-        @location.description.should == 'A great town.'
-      end 
-
-      it 'no actions' do
-        @location.has_action(:any).should == false
-      end
-
-      it 'no parent Location' do
-        @location.parent_location.should == nil
-      end
-    end
+    it { should_not have_action(:any) } 
 
     it 'still returns only a single Location' do
-      @locations.length.should == 1
+      locations.length.should == 1
     end
   end
   
   describe 'when parsing hierarchical Locations' do
     before do
-      @locations = parse('spec/data/hierarchical_locations.rb')
+      @locations = parse_file('spec/data/hierarchical_locations.rb')
     end
 
     it 'returns the correct number of Locations' do
@@ -64,7 +56,7 @@ describe LocationBuilder do
 
   describe 'when parsing a Location that includes an Item' do
     before do
-      @location = parse('spec/data/location_with_item.rb').first
+      @location = parse_file('spec/data/location_with_item.rb').first
     end
   
     context 'returns a single Location that' do

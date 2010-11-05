@@ -42,11 +42,22 @@ module LocationBuilder
     current_obj.add_action(symbol, &block)
   end
 
-  def parse(fileName)
-    load fileName 
+  def parse_file(fileName)
+    load fileName
+    finish_parse 
+  end
+  
+  def parse(block)
+    block.call
+    #instance_eval &la
+    finish_parse
+  end
+ 
+  def finish_parse
     locations = @@locations.clone
     @@locations.clear
     locations
   end
+
 
 end
