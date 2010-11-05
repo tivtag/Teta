@@ -22,5 +22,9 @@ module ItemContainer
   def find_item_by_name(name)
      @items.find {|item| item.name == name}
   end
+  
+  def remove_item(name)
+    item = @items.delete_at @items.find_index {|item| item.name == name}
+  end
 
 end

@@ -3,13 +3,14 @@ require_relative 'runner'
 
 include LocationBuilder
 
-puts "Parsing..!"
-locations = parse('data/chapter_1.rb')
-puts "done! "
-puts locations.to_s
+puts
+puts "Welcome to Teta. Enter 'help' at any time."
+puts
+
+locations = parse_file('data/chapter_1.rb')
 
 runner = Runner.new
 runner.locations = locations
 runner.location = locations[1] #.first
 
-runner.run 
+runner.run

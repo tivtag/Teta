@@ -91,7 +91,7 @@ describe LocationBuilder do
       loc.items.length == 1
     end
 
-    context "then the item's" do
+    context "then the Item's" do
       subject { loc.items[0] }
 
       its(:name) { should == :coin }

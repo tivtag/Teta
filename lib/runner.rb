@@ -27,7 +27,7 @@ private
        false
      else
        action = input.intern
-       if location.has_action action then
+       if location.has_action? action then
          location.eval_action action
        else
          puts "I can't do that here."

@@ -25,6 +25,18 @@ shared_examples_for 'an ItemContainer' do
       it "does not contain an Item that wasn't added" do
         container.has_item?(:water).should be_false
       end
+       
+      context 'and removing the Item again' do
+        
+        before do
+          container.remove_item :potion
+        end
+
+        it 'does not contain the Item anymore' do
+          container.has_item?(:potion).should be_false
+        end
+
+      end
  
     end
 
