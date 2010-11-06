@@ -2,14 +2,17 @@ require_relative 'location'
 require_relative 'action_container'
 
 class Runner
-  includes ActionContainer
+  include ActionContainer
 
   attr_accessor :locations, :location
 
   def initialize
+    super
     @running = true
      
-    add_action(:quit, { @running = false })
+    add_action :quit do
+      @running = false
+    end
   end
 
   def run
