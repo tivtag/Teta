@@ -1,13 +1,22 @@
 require_relative 'location'
+require_relative 'action_container'
 
 class Runner
-  
+  includes ActionContainer
+
   attr_accessor :locations, :location
+
+  def initialize
+    @running = true
+     
+    add_action(:quit, { @running = false })
+  end
 
   def run
     print_location 
  
-    while step do
+    while @running do
+      step
     end
    
   end
@@ -24,16 +33,14 @@ private
 
   def handle(input)
     action = input.intern
+   
+    if location.has_action? action then
+      location.eval_action action
+    else if self.has_action? action then
+  
+      
 
-    if action == :quit then
-       false
-    else
-      if location.has_action? action then
-        location.eval_action action
-      else
-        puts "Huh..?"
-      end
-      true
+      puts "Huh..?"
     end
   end
 
@@ -42,7 +49,7 @@ private
         location.eval_action action
         true
       else
-               
+              
 
         false
       end
