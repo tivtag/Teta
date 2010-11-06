@@ -1,6 +1,6 @@
 require_relative '../lib/location'
-require_relative 'item_container_specs'
-require_relative 'action_container_specs'
+require 'shared/item_container_specs'
+require 'shared/action_container_specs'
 
 describe Location do
   it_behaves_like 'an ItemContainer'

@@ -34,25 +34,13 @@ private
   def handle(input)
     action = input.intern
    
-    if location.has_action? action then
-      location.eval_action action
-    else if self.has_action? action then
-  
-      
-
+    if not handle_action action then
       puts "Huh..?"
     end
   end
 
   def handle_action(action)
-      if location.has_action? action then
-        location.eval_action action
-        true
-      else
-              
-
-        false
-      end
+    location.eval_action_safe action or self.eval_action_safe action 
   end
 
   def print_location   
