@@ -14,9 +14,21 @@ module ItemContainer
     @items << item
     item  
   end
+
+  def add_items(names)
+    items = []
+    names.each do |name|
+       items << add_item(name)
+    end
+    items
+  end
   
   def has_item?(name)
     find_item_by_name(name) != nil
+  end
+
+  def has_items?(names)
+    not names.find {|name| not has_item?(name) }
   end
 
   def find_item_by_name(name)

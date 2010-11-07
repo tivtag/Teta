@@ -2,7 +2,7 @@
 shared_examples_for 'an ItemContainer' do
   
   let(:container) { described_class.new() }
-  
+
   context 'when initialized' do
     it 'contains no items' do
       container.items.should have(0).items
@@ -27,7 +27,6 @@ shared_examples_for 'an ItemContainer' do
       end
        
       context 'and removing the Item again' do
-        
         before do
           container.remove_item :potion
         end
@@ -35,11 +34,25 @@ shared_examples_for 'an ItemContainer' do
         it 'does not contain the Item anymore' do
           container.has_item?(:potion).should be_false
         end
-
       end
  
     end
 
+    context 'after adding multiple Items' do
+      let(:item_names) { [:bag, :coin, :sweets] }
+
+      before do
+        container.add_items(item_names)
+      end
+
+      it 'contains all Items that were added' do
+        container.has_items?(item_names).should be_true
+      end
+
+      it 'but does not contain Items that were not added' do
+        container.has_items?(item_names << :hat).should be_false
+      end
+    end
   end
 
 end

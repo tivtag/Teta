@@ -18,7 +18,6 @@ class Runner
       puts "Command List: "
       puts "quit - Quits the game."
       puts "help - Shows this list:)"
-
     end
   end
 
