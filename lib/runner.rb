@@ -13,6 +13,13 @@ class Runner
     add_action :quit do
       @running = false
     end
+
+    add_action :help do
+      puts "Command List: "
+      puts "quit - Quits the game."
+      puts "help - Shows this list:)"
+
+    end
   end
 
   def run
