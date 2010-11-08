@@ -1,9 +1,11 @@
 require_relative 'location'
+require_relative 'item_factory'
 
 module LocationBuilder
 
   @@locations = []
   @@obj_stack = []
+  @@item_factory = ItemFactory.new
 
   def current_obj
     @@obj_stack.last
@@ -34,8 +36,8 @@ module LocationBuilder
   def remote_location(sym)
   end
 
-  def item(symbol)
-    current_obj.add_item symbol
+  def item(name)
+    current_obj.add_item @@item_factory.create(name) 
   end
 
   def action(symbol, &block)
@@ -49,7 +51,6 @@ module LocationBuilder
   
   def parse(block)
     block.call
-    #instance_eval &la
     finish_parse
   end
  
@@ -58,6 +59,5 @@ module LocationBuilder
     @@locations.clear
     locations
   end
-
 
 end

@@ -8,17 +8,14 @@ module ItemContainer
     @items = []
   end
 
-  def add_item(name)
-    item = Item.new
-    item.name = name
+  def add_item(item)
     @items << item
     item  
   end
 
-  def add_items(names)
-    items = []
-    names.each do |name|
-       items << add_item(name)
+  def add_items(items)
+    items.each do |item|
+       add_item(item)
     end
     items
   end

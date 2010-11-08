@@ -1,10 +1,12 @@
 require 'json'
 require_relative 'item_container'
 require_relative 'action_container'
+require_relative 'game_context'
 
 class Location
   include ItemContainer
   include ActionContainer
+  include GameContext
   attr_accessor :name, :long_name, :description, :parent_location
 
   def initialize
@@ -28,6 +30,10 @@ class Location
   end
 
   def take(symbol = :all)
-     puts "Huh.."
+     if symbol == :all then
+
+
+     else
+     end
   end 
 end

@@ -1,10 +1,12 @@
 require_relative '../lib/location'
 require 'shared/item_container_specs'
 require 'shared/action_container_specs'
+require 'shared/game_context_provider_specs'
 
 describe Location do
   it_behaves_like 'an ItemContainer'
   it_behaves_like 'an ActionContainer'
+  it_behaves_like 'a GameContext'
 
   describe "when first created" do
     

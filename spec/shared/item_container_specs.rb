@@ -2,6 +2,7 @@
 shared_examples_for 'an ItemContainer' do
   
   let(:container) { described_class.new() }
+  let(:factory) { ItemFactory.new }
 
   context 'when initialized' do
     it 'contains no items' do
@@ -15,7 +16,7 @@ shared_examples_for 'an ItemContainer' do
     context 'after adding one Item' do
 
       before do
-        container.add_item :potion
+        container.add_item factory.create(:potion)
       end
 
       it 'contains the added Item' do
@@ -42,7 +43,8 @@ shared_examples_for 'an ItemContainer' do
       let(:item_names) { [:bag, :coin, :sweets] }
 
       before do
-        container.add_items(item_names)
+        items = factory.create_all(item_names)
+        container.add_items(items)
       end
 
       it 'contains all Items that were added' do
