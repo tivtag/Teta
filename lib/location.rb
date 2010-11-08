@@ -31,8 +31,6 @@ class Location
 
   def take(symbol = :all)
      if symbol == :all then
-
-
      else
      end
   end 

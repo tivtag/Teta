@@ -33,7 +33,22 @@ module ItemContainer
   end
   
   def remove_item(name)
-    item = @items.delete_at @items.find_index {|item| item.name == name}
+    @items.delete_at @items.find_index {|item| item.name == name}
   end
 
+  def remove_items(names = nil)
+
+     if names == nil then
+        removed_items = @items.clone
+        @items.clear
+     else
+        removed_items = []
+        names.each do |name|
+          item = remove_item(name)
+          removed_items << item unless item == nil
+        end
+     end
+
+     removed_items
+  end
 end

@@ -29,11 +29,15 @@ shared_examples_for 'an ItemContainer' do
        
       context 'and removing the Item again' do
         before do
-          container.remove_item :potion
+          @item = container.remove_item :potion
         end
 
         it 'does not contain the Item anymore' do
           container.has_item?(:potion).should be_false
+        end
+
+        it 'returned the removed Item' do
+          @item.name.should == :potion
         end
       end
  
@@ -54,7 +58,42 @@ shared_examples_for 'an ItemContainer' do
       it 'but does not contain Items that were not added' do
         container.has_items?(item_names << :hat).should be_false
       end
+
+      context 'after removing all Items' do
+        before do
+          @items = container.remove_items()
+        end
+
+        it 'does not contain any Items anymore' do
+          container.items.length.should == 0
+        end
+
+        it 'returned the removed Items' do
+          removed_item_names = @items.map {|item| item.name}
+          removed_item_names.should == item_names
+        end
+      end
+
+      context 'after removing a few of the Items' do
+        let(:items_to_remove) { [:bag, :coin] }
+
+        before do
+          @items = container.remove_items(items_to_remove)
+        end
+  
+        it 'does not contain the removed Items anymore' do
+          container.has_items?(items_to_remove).should be_false
+        end
+
+        it 'still contains the other Items.' do
+          container.has_item?(:sweets).should be_true
+        end
+
+        it 'returned the removed Items' do
+          removed_item_names = @items.map {|item| item.name}
+          removed_item_names.should == items_to_remove
+        end
+      end
     end
   end
-
 end
