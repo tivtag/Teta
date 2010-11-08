@@ -1,15 +1,18 @@
 require_relative 'location'
 require_relative 'action_container'
+require_relative 'game_context'
 
 class Runner
   include ActionContainer
+  include GameContext
 
   attr_accessor :locations, :location
 
   def initialize
     super
+    @player = Player.new
     @running = true
-     
+    
     add_action :quit do
       @running = false
     end
@@ -22,6 +25,7 @@ class Runner
   end
 
   def run
+    setup_location
     print_location 
  
     while @running do
@@ -55,6 +59,10 @@ private
   def print_location   
     text = location.description.gsub(/\n/, '').gsub(/ +/, ' ')
     puts text
+  end
+
+  def setup_location
+    @location.setup_context(self)
   end
 
 end

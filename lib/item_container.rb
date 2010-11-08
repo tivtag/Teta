@@ -33,7 +33,8 @@ module ItemContainer
   end
   
   def remove_item(name)
-    @items.delete_at @items.find_index {|item| item.name == name}
+    index = @items.find_index {|item| item.name == name}
+    @items.delete_at index unless index == nil
   end
 
   def remove_items(names = nil)

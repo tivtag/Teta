@@ -95,5 +95,13 @@ shared_examples_for 'an ItemContainer' do
         end
       end
     end
+
+    context 'when trying to remove an unknown Item' do
+      it 'should return nil' do
+        item = container.remove_item(:blub)
+        item.should be_nil
+      end
+    end
+
   end
 end

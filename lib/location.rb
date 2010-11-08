@@ -31,7 +31,15 @@ class Location
 
   def take(symbol = :all)
      if symbol == :all then
+       items = remove_items()
+       player.add_items(items)
      else
+       item = remove_item(symbol)
+       
+       if item != nil then
+         player.add_item(item)
+         puts "You find '#{item.long_name}'."
+       end
      end
   end 
 end
