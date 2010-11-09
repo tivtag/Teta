@@ -18,9 +18,20 @@ class Runner
     end
 
     add_action :help do
-      puts "Command List: "
-      puts "quit - Quits the game."
-      puts "help - Shows this list:)"
+      puts 'Command List: '
+      puts 'quit - Quits the game.'
+      puts 'inv  - Shows the content of your inventory.' 
+      puts 'help - Shows this list:)'
+    end
+
+    add_action :inv do
+      if player.items.length > 0 then
+        @player.items.each do |item|
+          puts "1x #{item.long_name}"
+        end
+      else
+        puts '~ empty ~'
+      end
     end
   end
 
