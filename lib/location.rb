@@ -7,10 +7,18 @@ class Location
   include ItemContainer
   include ActionContainer
   include GameContext
-  attr_accessor :name, :long_name, :description, :parent_location
+  attr_accessor :name, :long_name, :description, :parent_location, 
+                :child_locations
 
   def initialize
+    @child_locations = []
     super
+  end
+
+  def connected_locations
+    locations = []    
+    locations << parent_location unless parent_location == nil
+    locations |= child_locations
   end
 
   def parent_location_name

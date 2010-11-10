@@ -25,9 +25,11 @@ describe LocationBuilder do
     its(:long_name)       { should == 'Viva La Vegas' }
     its(:description)     { should == 'A great town.' }
     its(:parent_location) { should be_nil }
+    its(:child_locations) { should be_empty }
+    its(:connected_locations) { should be_empty }
 
     it { should_not have_action(:any) } 
-
+         
     it 'still returns only a single Location' do
       locations.length.should == 1
     end
@@ -67,6 +69,36 @@ describe LocationBuilder do
        parent_hash = {:street => nil, :park => :street, :bank => :park, :house => :street, :door => :house}
       
        locations.each {|location| location.should satisfy {|arg| parent_hash[location.name] == location.parent_location_name}}              
+    end
+
+    it 'returns Locations that know their child Locations' do
+      hash = {
+        :street => [:park, :house],
+        :park => [:bank],
+        :bank => [],
+        :house => [:door],
+        :door => []
+      }
+
+      locations.each do |location|
+        child_location_names = location.child_locations.map {|location| location.name }
+        child_location_names.should == hash[location.name]
+      end
+    end
+
+    it 'returns Locations that are connected to their parent Location and child Locations' do
+      hash = {
+        :street => [:park, :house],
+        :park => [:street, :bank],
+        :bank => [:park],
+        :house => [:street, :door],
+        :door => [:house]
+      }
+
+      locations.each do |location|
+        location_names = location.connected_locations.map {|location| location.name }
+        location_names.should == hash[location.name]
+      end
     end
   end
   

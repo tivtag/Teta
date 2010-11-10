@@ -11,6 +11,6 @@ locations = parse_file('data/chapter_1.rb')
 
 runner = Runner.new
 runner.locations = locations
-runner.location = locations[1] #.first
+runner.location = locations[0]
 
 runner.run

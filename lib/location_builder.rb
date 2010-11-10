@@ -12,10 +12,16 @@ module LocationBuilder
   end
 
   def location(sym)
+    parent_location = current_obj
+    
     location = Location.new
     location.name = sym
     location.long_name = sym.to_s
-    location.parent_location = current_obj
+    
+    if parent_location != nil then
+      location.parent_location = parent_location
+      parent_location.child_locations << location
+    end
 
     @@locations << location
     @@obj_stack.push location  

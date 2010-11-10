@@ -14,15 +14,15 @@ module ActionContainer
     @actions.has_key? symbol
   end
 
-  def eval_action(symbol)
+  def eval_action(symbol, *args)
     action = @actions[symbol]
 
-    self.instance_eval(&action)
+    self.instance_exec(*args, &action)
   end
 
-  def eval_action_safe(symbol)
+  def eval_action_safe(symbol, *args)
      if has_action? symbol then
-       [eval_action(symbol)]
+       [eval_action(symbol, *args)]
      else
        nil
      end

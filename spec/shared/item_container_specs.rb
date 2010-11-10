@@ -1,3 +1,5 @@
+require_relative '../../lib/item_container'
+require_relative '../../lib/item_factory'
 
 shared_examples_for 'an ItemContainer' do
   

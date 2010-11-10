@@ -33,6 +33,25 @@ class Runner
         puts '~ empty ~'
       end
     end
+
+    add_action :goto do |location_name|
+      available_locations = location.connected_locations
+
+      if location_name != nil then
+        loc = available_locations.find {|child| child.name == location_name.intern}
+      else
+        loc = nil
+      end
+
+      if loc != nil then
+        @location = loc
+        print_location
+      else
+        puts "I can't go there." unless location_name == nil
+        puts 'Available: '
+        available_locations.each {|loc| puts "  #{loc.name}"}        
+      end
+    end
   end
 
   def run
@@ -56,19 +75,21 @@ private
   end
 
   def handle(input)
-    action = input.intern
+    entries = input.split ' '
+    action = entries.first.intern
+    args   = entries[1..entries.length]
    
-    if not handle_action action then
+    if not handle_action(action, args) then
       puts "Huh..?"
     end
   end
 
-  def handle_action(action)
-    location.eval_action_safe action or self.eval_action_safe action 
+  def handle_action(action, args)
+    location.eval_action_safe(action, *args) or self.eval_action_safe(action, *args)
   end
 
   def print_location   
-    text = location.description.gsub(/\n/, '').gsub(/ +/, ' ')
+    text = @location.description.gsub(/\n/, '').gsub(/ +/, ' ')
     puts text
   end
 
