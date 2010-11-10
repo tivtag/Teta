@@ -101,6 +101,46 @@ describe LocationBuilder do
       end
     end
   end
+
+  describe 'when parsing a Location that is remotely connected to another Location' do
+
+    let(:data) do
+      lambda do
+        
+        location :kitchen do
+          remote_locations :living, :cellar
+        end
+
+        location :living do
+        end
+
+        location :cellar do
+        end
+
+      end
+    end
+
+    let(:locations) { parse(data) }
+    let(:hash) do { 
+        :kitchen => [:living, :cellar],
+        :living => [:kitchen],
+        :cellar => [:kitchen]
+      }
+    end
+
+    it 'should return Locations that are correctly connected' do
+      locations.each do |location|
+        location.connected_location_names.should == hash[location.name]
+      end
+    end
+
+    it 'should return Locations that are correctly know
+        about the Locations they are remotely connected to' do
+      locations.each do |location|
+        location.connected_locations.should == location.remote_locations
+      end
+    end
+  end
   
   describe 'when parsing a Location that includes an Item' do
     let(:data) do

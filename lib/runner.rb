@@ -19,9 +19,10 @@ class Runner
 
     add_action :help do
       puts 'Command List: '
-      puts 'quit - Quits the game.'
-      puts 'inv  - Shows the content of your inventory.' 
-      puts 'help - Shows this list:)'
+      puts 'quit        - Quits the game.'
+      puts 'goto [name] - Moves to the location that has the given [name].'
+      puts 'inv         - Shows the content of your inventory.' 
+      puts 'help        - Shows this list:)'
     end
 
     add_action :inv do

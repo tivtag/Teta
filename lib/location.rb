@@ -8,10 +8,11 @@ class Location
   include ActionContainer
   include GameContext
   attr_accessor :name, :long_name, :description, :parent_location, 
-                :child_locations
+                :child_locations, :remote_locations
 
   def initialize
     @child_locations = []
+    @remote_locations = []
     super
   end
 
@@ -19,6 +20,11 @@ class Location
     locations = []    
     locations << parent_location unless parent_location == nil
     locations |= child_locations
+    locations |= remote_locations
+  end
+
+  def connected_location_names
+    connected_locations.map {|location| location.name}
   end
 
   def parent_location_name

@@ -39,7 +39,12 @@ module LocationBuilder
     current_obj.description = text
   end
 
-  def remote_location(sym)
+  def remote_locations(*names)
+    names.each { |name| remote_location name }
+  end
+
+  def remote_location(name)
+    current_obj.remote_locations << name
   end
 
   def item(name)
@@ -59,8 +64,53 @@ module LocationBuilder
     block.call
     finish_parse
   end
+
+  def find_location_named(name)
+    @@locations.detect do |loc|
+      loc.name == name
+    end
+  end
+
+  # Replaces the names of remote locations
+  # that have been temporarily stored in the list of
+  # remote locations with the actual location objects.
+  def replace_remote_location_names
+    @@locations.each do |location|
+      remote_locations = []
+
+      location.remote_locations.each do |remote_location_name|
+        remote_location = find_location_named remote_location_name
+
+        if remote_location == nil then
+          raise "Could not find remote location '#{remote_location_name}'"
+        else
+          remote_locations << remote_location
+        end
+
+      end
+     
+      location.remote_locations = remote_locations
+    end
+  end
+
+  # Makes sure that all remote locations
+  # are connected to eachother.
+  def mirror_remote_locations
+    @@locations.each do |location|
+      location.remote_locations.each do |remote_location|
  
+        if not remote_location.remote_locations.include?(location) then
+          remote_location.remote_locations << location
+        end
+
+      end
+    end
+  end
+
   def finish_parse
+    replace_remote_location_names
+    mirror_remote_locations
+
     locations = @@locations.clone
     @@locations.clear
     locations
