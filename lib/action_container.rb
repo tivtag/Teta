@@ -17,7 +17,11 @@ module ActionContainer
   def eval_action(symbol, *args)
     action = @actions[symbol]
 
-    self.instance_exec(*args, &action)
+    if action.arity == 0 then
+      self.instance_eval(&action)
+    else
+      self.instance_exec(*args, &action)
+    end
   end
 
   def eval_action_safe(symbol, *args)

@@ -44,7 +44,7 @@ class Runner
       end
 
       if loc != nil then
-        @location = loc
+        change_location loc
         print_location
       else
         puts "I can't go there." unless location_name == nil
@@ -91,6 +91,11 @@ private
   def print_location   
     text = @location.description.gsub(/\n/, '').gsub(/ +/, ' ')
     puts text
+  end
+
+  def change_location(loc)
+    @location = loc
+    setup_location
   end
 
   def setup_location
