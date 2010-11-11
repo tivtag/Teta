@@ -1,12 +1,11 @@
-require 'json'
 require_relative 'item_container'
 require_relative 'action_container'
-require_relative 'game_context'
+require_relative 'game_context_provider'
 
 class Location
   include ItemContainer
   include ActionContainer
-  include GameContext
+  include GameContextProvider
   attr_accessor :name, :long_name, :description, :parent_location, 
                 :child_locations, :remote_locations
 

@@ -2,9 +2,8 @@ require_relative 'location'
 require_relative 'action_container'
 require_relative 'game_context'
 
-class Runner
+class Runner < GameContext
   include ActionContainer
-  include GameContext
 
   attr_accessor :locations, :location
 
@@ -49,8 +48,7 @@ class Runner
         print_location
       else
         puts "I can't go there." unless location_name == nil
-        puts 'Available: '
-        available_locations.each {|loc| puts "  #{loc.name}"}        
+        available_locations.each {|loc| puts "    #{loc.name}"}        
       end
     end
   end
@@ -100,7 +98,7 @@ private
   end
 
   def setup_location
-    @location.setup_context(self)
+    @location.context = self
   end
 
 end
