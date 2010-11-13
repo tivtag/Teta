@@ -25,6 +25,7 @@ class Runner < GameContext
         puts 'goto [name] - Moves to the location that has the given [name].'
         puts 'inv         - Shows the content of your inventory.'
         puts 'use [obj]   - Uses an object in the current location or your inventory.'
+        puts 'look [name] - Looks at the inventory object with the given [name].'
         puts 'help [cmd]  - Shows extended help about the given [command].'
       else
         case cmd
@@ -42,8 +43,11 @@ class Runner < GameContext
           puts ' Example usage: "goto"'
         when 'inv'
           puts 'Shows the content of your inventory.'
-          puts 'You can use the [lookat] command to look at an item in your inventory.'
-          puts '  Example usage: "lookat bottle"'
+          puts 'You can use the [look] command to look at an item in your inventory.'
+          puts '  Example usage: "inv"'
+        when 'look'
+          puts 'Takes a closer look at the item with the given [name]. Supports partial names.'
+          puts '  Example usage: "look bottle"
         when 'help'
           puts 'Meow?'
         when 'use'
@@ -88,10 +92,10 @@ class Runner < GameContext
       end
     end
 
-    add_action :lookat do |item_name|
+    add_action :look do |item_name|
     
       if item_name != nil then
-        item = player.find_item item_name
+        item = player.find_item_named_like item_name
 
         if item != nil then
           if item.description != nil then

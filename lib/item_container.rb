@@ -31,7 +31,13 @@ module ItemContainer
   def find_item_by_name(name)
      @items.find {|item| item.name == name}
   end
-  
+ 
+  def find_item_named_like(text)
+    
+    @items.find {|item| item.name.to_s.start_set.include? text }
+
+  end
+
   def remove_item(name)
     index = @items.find_index {|item| item.name == name}
     @items.delete_at index unless index == nil

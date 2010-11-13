@@ -13,7 +13,7 @@ location :kitchen do
           You have to force yourself to lift your view. The rest of the floor looks rather blank.
           In one of the corners lies an empty loam [bottle]."
 
-    item :bottle
+    item :bottle, 'A loam bottle. It is slightly damaged.'
 
     action :take do |item|
       if take item then
@@ -26,7 +26,7 @@ location :kitchen do
 
   location :dispenser do
     desc 'Water is steadily dropping from the iron-glad dispenser. This would keep you awake at night. Very annoying.'
-    item :water
+    item :water, 'A water-filled loam bottle.'
 
     action :use do |item|
       if remove_player item, :bottle then
@@ -41,7 +41,8 @@ location :kitchen do
     desc 'The thick smoke burns in your eyes. As you inspect the fire sink you manage to
           catch a glimpse of something shiny! Try to [take] it?'
 
-    item :gold_coin
+    item :gold_coin, 'Very shiny! Must be worth a ton.'
+
     action :take do
        if itis :safe then take :gold_coin else puts 'Aah! Autsch! That hurt!' end
     end
