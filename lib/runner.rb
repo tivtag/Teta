@@ -6,6 +6,7 @@ require_relative 'string_ext'
 class Runner < GameContext
   include ActionContainer
 
+  attr_reader :previous_location
   attr_accessor :locations, :location
 
   def initialize
@@ -23,6 +24,7 @@ class Runner < GameContext
         puts 'Command List: '
         puts 'quit        - Quits this game.'
         puts 'goto [name] - Moves to the location that has the given [name].'
+        puts 'go back     - Movies to the previous location.'
         puts 'inv         - Shows the content of your inventory.'
         puts 'use [obj]   - Uses an object in the current location or your inventory.'
         puts 'look [name] - Looks at the inventory object with the given [name].'
@@ -31,6 +33,10 @@ class Runner < GameContext
         case cmd
         when 'quit'
           puts 'Quits this game. Progress is NOT saved. /sad'
+
+        when 'go'
+          puts 'Moves to the previous location if [back] or [b] is given.'
+          puts '  Example usage: "go back"'
         when 'goto'
           puts 'Moves to the location with the given [name]. The name does not have to be fully entered.'
           puts 'The following commands all would go to the kitchen (if only the kitchen was available):'
@@ -57,6 +63,22 @@ class Runner < GameContext
           puts "Sorry. I can't help you."
         end
       end
+    end
+    
+    add_action :go do |dir|
+
+      case dir
+      when 'back', 'b'
+        if @previous_location != nil && @location.connected?(@previous_location) then
+          change_location @previous_location
+          print_location
+        else
+          puts 'This is impossible!' 
+        end
+      else
+        puts "I can't do that."
+      end
+
     end
 
     add_action :inv do
@@ -154,6 +176,7 @@ private
   end
 
   def change_location(loc)
+    @previous_location = @location
     @location = loc
     setup_location
   end

@@ -34,9 +34,13 @@ class Location
        parent_location.name
      end
   end
-
+  
   def desc(text)
     @description = text
+  end
+
+  def connected?(location)
+    connected_locations.include? location
   end
 
   def to_s
