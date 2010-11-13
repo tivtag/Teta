@@ -47,7 +47,7 @@ class Runner < GameContext
           puts '  Example usage: "inv"'
         when 'look'
           puts 'Takes a closer look at the item with the given [name]. Supports partial names.'
-          puts '  Example usage: "look bottle"
+          puts '  Example usage: "look bottle"'
         when 'help'
           puts 'Meow?'
         when 'use'
