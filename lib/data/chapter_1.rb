@@ -3,7 +3,7 @@ location :kitchen do
   
   desc 'A fading [fire] is illuminating the room. Wads of smoke are originating from the fire sink.
         The kitchen [floor] is made of strangely decorated marble plates.
-        You can hear water slowly trickeling from the [water] dispenser.'  
+        You can hear water slowly trickeling from the water [dispenser].'  
 
   remote_location :station
 
@@ -16,8 +16,21 @@ location :kitchen do
     item :bottle
 
     action :take do |item|
-      if take item.intern then
+      if take item then
         remove_last_sentence
+      else
+        unknown
+      end
+    end
+  end
+
+  location :dispenser do
+    desc 'Water is steadily dropping from the iron-glad dispenser. This would keep you awake at night. Very annoying.'
+    item :water
+
+    action :use do |item|
+      if remove_player item, :bottle then
+        take :water
       else
         unknown
       end
@@ -33,9 +46,9 @@ location :kitchen do
        if itis :safe then take :gold_coin else puts 'Aah! Autsch! That hurt!' end
     end
 
-    action :put do |item|
+    action :use do |item|
    
-      if remove_player_item item, :water then
+      if remove_player item, :water then
         set :safe
         puts 'You extinguish the flame using the water.'
       else

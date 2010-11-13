@@ -52,6 +52,8 @@ class Location
   end
 
   def take(symbol = :all)
+     symbol = symbol.intern
+
      if symbol == :all then
        items = remove_items()
        player.add_items(items)

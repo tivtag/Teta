@@ -1,6 +1,7 @@
 require_relative 'location'
 require_relative 'action_container'
 require_relative 'game_context'
+require_relative 'string_ext'
 
 class Runner < GameContext
   include ActionContainer
@@ -16,12 +17,42 @@ class Runner < GameContext
       @running = false
     end
 
-    add_action :help do
-      puts 'Command List: '
-      puts 'quit        - Quits the game.'
-      puts 'goto [name] - Moves to the location that has the given [name].'
-      puts 'inv         - Shows the content of your inventory.' 
-      puts 'help        - Shows this list:)'
+    add_action :help do |cmd|
+
+      if cmd == nil then
+        puts 'Command List: '
+        puts 'quit        - Quits this game.'
+        puts 'goto [name] - Moves to the location that has the given [name].'
+        puts 'inv         - Shows the content of your inventory.'
+        puts 'use [obj]   - Uses an object in the current location or your inventory.'
+        puts 'help [cmd]  - Shows extended help about the given [command].'
+      else
+        case cmd
+        when 'quit'
+          puts 'Quits this game. Progress is NOT saved. /sad'
+        when 'goto'
+          puts 'Moves to the location with the given [name]. The name does not have to be fully entered.'
+          puts 'The following commands all would go to the kitchen (if only the kitchen was available):'
+          puts 
+          puts '    "goto kitchen"'
+          puts '    "goto kit"'
+          puts '    "goto k"'
+          puts
+          puts 'The list of available locations is shown if no location is entered.'
+          puts ' Example usage: "goto"'
+        when 'inv'
+          puts 'Shows the content of your inventory.'
+          puts 'You can use the [look] command to look at an item in your inventory.'
+          puts '  Example usage: "look bottle"'
+        when 'help'
+          puts 'Meow?'
+        when 'use'
+          puts 'Uses an item in your inventory at the current location or uses an object at the current location.'
+          puts '  Example usage: "use bottle"'
+        else
+          puts "Sorry. I can't help you."
+        end
+      end
     end
 
     add_action :inv do
@@ -39,6 +70,11 @@ class Runner < GameContext
 
       if location_name != nil then
         loc = available_locations.find {|child| child.name == location_name.intern}
+
+        # Allow the user to enter 'fi' to go to 'fire':
+        if loc == nil then
+          loc = available_locations.find {|child| child.name.to_s.start_set.include? location_name.to_s } 
+        end
       else
         loc = nil
       end

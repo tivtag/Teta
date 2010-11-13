@@ -7,9 +7,11 @@ module GameContextProvider
     context.player
   end
 
-  def remove_player_item(actual_item, expected_item)
-    if actual_item == expected_item then
-      player.remove_item actual_item
+  def remove_player(item, expected_item)
+    item = item.intern
+
+    if item == expected_item then
+      player.remove_item item
     else
       nil
     end
