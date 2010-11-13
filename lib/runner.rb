@@ -42,8 +42,8 @@ class Runner < GameContext
           puts ' Example usage: "goto"'
         when 'inv'
           puts 'Shows the content of your inventory.'
-          puts 'You can use the [look] command to look at an item in your inventory.'
-          puts '  Example usage: "look bottle"'
+          puts 'You can use the [lookat] command to look at an item in your inventory.'
+          puts '  Example usage: "lookat bottle"'
         when 'help'
           puts 'Meow?'
         when 'use'
@@ -86,6 +86,27 @@ class Runner < GameContext
         puts "I can't go there." unless location_name == nil
         available_locations.each {|loc| puts "    #{loc.name}"}        
       end
+    end
+
+    add_action :lookat do |item_name|
+    
+      if item_name != nil then
+        item = player.find_item item_name
+
+        if item != nil then
+          if item.description != nil then
+            puts item.description
+          else
+            puts 'There is nothing special about this item.'
+          end
+        else
+          puts 'Nothing to look at.'
+        end
+
+      else
+        print_location
+      end
+
     end
   end
 

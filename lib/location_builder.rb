@@ -47,8 +47,19 @@ module LocationBuilder
     current_obj.remote_locations << name
   end
 
-  def item(name)
-    current_obj.add_item @@item_factory.create(name) 
+  def item(name, description = nil)
+    item = @@item_factory.create(name)
+
+    if description != nil then
+      item.description = description
+    end
+
+    if block_given? then
+      block = Proc.new
+      item.instance_eval &block
+    end
+
+    current_obj.add_item item
   end
 
   def action(symbol, &block)

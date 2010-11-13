@@ -147,7 +147,7 @@ describe LocationBuilder do
       lambda do
         
         location :table do
-          item :coin
+          item :coin, 'A silver coin.'
 
           action :search do
             take :coin
@@ -166,7 +166,8 @@ describe LocationBuilder do
     context "then the Item's" do
       subject { loc.items[0] }
 
-      its(:name) { should == :coin }
+      its(:name)        { should == :coin }
+      its(:description) { should == 'A silver coin.' }
     end
 
   end
