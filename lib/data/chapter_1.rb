@@ -5,7 +5,7 @@ location :kitchen do
         The kitchen [floor] is made of strangely decorated marble plates.
         You can hear water slowly trickeling from the water [dispenser].'  
 
-  remote_location :station
+  remote_location :store_room
 
   location :floor do
     desc "Some of the marble plates picture some-thing- that you can't.. really describe.
@@ -61,7 +61,6 @@ location :kitchen do
  	
 end
 
-location :station do
-  name 'Station Charly'
-  desc 'A deserted ...'
+location :store_room do
+  desc 'A deserted ... unfinished room.'
 end

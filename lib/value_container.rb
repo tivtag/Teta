@@ -18,7 +18,5 @@ module ValueContainer
     @values.delete key
   end
 
-  def itis(key)
-    has_value? key
-  end
+  alias :itis :has_value?
 end
