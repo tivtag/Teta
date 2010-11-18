@@ -20,14 +20,14 @@ class HelpSystem
   class Commands
     class << self    
       def all
-          puts 'Command List: '
-          puts 'quit        - Quits this game.'
-          puts 'goto [name] - Moves to the location that has the given [name].'
-          puts 'go back     - Movies to the previous location.'
-          puts 'inv         - Shows the content of your inventory.'
-          puts 'use [obj]   - Uses an object in the current location or your inventory.'
-          puts 'look [name] - Looks at the inventory object with the given [name].'
-          puts 'help [cmd]  - Shows extended help about the given [command].'
+        puts 'Command List: '
+        puts 'quit        - Quits this game.'
+        puts 'goto [name] - Moves to the location that has the given [name].'
+        puts 'go back     - Movies to the previous location.'
+        puts 'inv         - Shows the content of your inventory.'
+        puts 'use [obj]   - Uses an object in the current location or your inventory.'
+        puts 'look [name] - Looks at the inventory object with the given [name].'
+        puts 'help [cmd]  - Shows extended help about the given [command].'
       end
 
       def quit
@@ -67,8 +67,8 @@ class HelpSystem
       end
 
       def use
-         puts 'Uses an item in your inventory at the current location or uses an object at the current location.'
-         puts '  Example usage: "use bottle"'
+        puts 'Uses an item in your inventory at the current location or uses an object at the current location.'
+        puts '  Example usage: "use bottle"'
       end
     end
   end
