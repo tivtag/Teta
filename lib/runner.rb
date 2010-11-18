@@ -12,10 +12,11 @@ class Runner < GameContext
 
   def initialize
     super
-    @player = Player.new
+  
+    @player  = Player.new
+    @help    = HelpSystem.new
     @running = true
-    @help = HelpSystem.new
-    
+
     add_action :quit do
       @running = false
     end
