@@ -29,7 +29,7 @@ class Runner < GameContext
 
       case dir
       when 'back', 'b'
-        if @previous_location != nil && @location.connected?(@previous_location) then
+        if @previous_location && @location.connected?(@previous_location) then
           change_location @previous_location
           print_location
         else
@@ -54,18 +54,18 @@ class Runner < GameContext
     add_action :goto do |location_name|
       available_locations = location.connected_locations
 
-      if location_name != nil then
+      if location_name then
         loc = available_locations.find {|child| child.name == location_name.intern}
 
         # Allow the user to enter 'fi' to go to 'fire':
-        if loc == nil then
+        if not loc then
           loc = available_locations.find {|child| child.name.to_s.start_set.include? location_name.to_s } 
         end
       else
         loc = nil
       end
 
-      if loc != nil then
+      if loc then
         change_location loc
         print_location
       else
@@ -76,11 +76,11 @@ class Runner < GameContext
 
     add_action :look do |item_name|
     
-      if item_name != nil then
+      if item_name then
         item = player.find_item_named_like item_name
 
-        if item != nil then
-          if item.description != nil then
+        if item then
+          if item.description then
             puts item.description
           else
             puts 'There is nothing special about this item.'
