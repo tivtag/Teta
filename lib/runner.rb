@@ -26,7 +26,6 @@ class Runner < GameContext
     end
     
     add_action :go do |dir|
-
       case dir
       when 'back', 'b'
         if @previous_location && @location.connected?(@previous_location) then
@@ -38,7 +37,6 @@ class Runner < GameContext
       else
         puts "I can't do that."
       end
-
     end
 
     add_action :inv do

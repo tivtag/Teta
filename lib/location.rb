@@ -23,6 +23,7 @@ class Location
     locations |= child_locations
     locations |= remote_locations
   end
+
   def connected_location_names
     connected_locations.map {|location| location.name}
   end
@@ -46,6 +47,8 @@ class Location
   def to_s
     "|#{name}, #{description} Parent = {#{if parent_location.nil? then "none" else parent_location.name end}}|\n"
   end
+
+  # DSL hooks:
 
   def remove_last_sentence
     sentences = @description.scan /.*?[.!?](?:\s|$)/
@@ -73,4 +76,6 @@ class Location
        end
      end
   end 
+
 end
+

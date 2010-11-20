@@ -1,5 +1,6 @@
 
 class String
+
   def start_set
     entries = []
     
@@ -9,4 +10,5 @@ class String
 
     entries
   end
+
 end

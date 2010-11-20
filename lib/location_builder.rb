@@ -26,7 +26,7 @@ module LocationBuilder
     @@locations << location
     @@obj_stack.push location  
 
-    yield
+    yield # Here we let the DSL take-over again.
 
     @@obj_stack.pop
   end

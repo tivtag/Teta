@@ -33,9 +33,7 @@ module ItemContainer
   end
  
   def find_item_named_like(text)
-    
     @items.find {|item| item.name.to_s.start_set.include? text }
-
   end
 
   def remove_item(name)
@@ -45,7 +43,7 @@ module ItemContainer
 
   def remove_items(names = nil)
 
-     if names == nil then
+     if names.nil? then
         removed_items = @items.clone
         @items.clear
      else

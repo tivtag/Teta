@@ -9,13 +9,11 @@ class ItemFactory
   end
 
   def create_all(names)
-  
     items = []
     names.each do |name|
       items << create(name)
     end
     items
-
   end
 
 end

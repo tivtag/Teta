@@ -4,7 +4,7 @@ module GameContextProvider
   attr_accessor :context
 
   def player
-    context.player
+    @context.player
   end
 
   def remove_player(item, expected_item)
