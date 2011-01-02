@@ -1,4 +1,4 @@
-require "ruby-sdl-ffi"
+require 'ruby-sdl-ffi'
 
 class MusicBox
 
