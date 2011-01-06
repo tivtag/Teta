@@ -41,7 +41,7 @@ location :kitchen do
     desc 'Thick smoke burns in your eyes. As you inspect the fire sink you manage to
           catch a glimpse of something shiny! Try to [take] it?'
 
-    item :gold_coin, '24K gold coin. It has a tentacle inprinted on it.'
+    item :gold_coin, '24K gold coin. Tentacles are inprinted on both sides. Disturbing!'
 
     action :take do
       if itis :safe then 
@@ -58,7 +58,7 @@ location :kitchen do
       if remove_player item, :water then
         set :safe
         puts 'You extinguish the flame using the water.'
-        desc 'The smoke still burns in your eyes. It should be safe to [take] the shiny object.'
+        desc 'The smoke still burns in your eyes. But it should now be safe to [take] the shiny object.'
       else
         unknown
       end
