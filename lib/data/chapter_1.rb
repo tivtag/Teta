@@ -38,13 +38,19 @@ location :kitchen do
   end
 
   location :fire do
-    desc 'The thick smoke burns in your eyes. As you inspect the fire sink you manage to
+    desc 'Thick smoke burns in your eyes. As you inspect the fire sink you manage to
           catch a glimpse of something shiny! Try to [take] it?'
 
-    item :gold_coin, 'Very shiny! Must be worth a ton.'
+    item :gold_coin, '24K gold coin. It has a tentacle inprinted on it.'
 
     action :take do
-       if itis :safe then take :gold_coin else puts 'Aah! Autsch! That hurt!' end
+      if itis :safe then 
+         take :gold_coin
+         unset :safe
+         desc 'The fire in the sink has re-ignited. Too hot!'
+      else 
+         puts 'Aah! Autsch! That hurt!'
+      end
     end
 
     action :use do |item|
@@ -52,6 +58,7 @@ location :kitchen do
       if remove_player item, :water then
         set :safe
         puts 'You extinguish the flame using the water.'
+        desc 'The smoke still burns in your eyes. It should be safe to [take] the shiny object.'
       else
         unknown
       end
