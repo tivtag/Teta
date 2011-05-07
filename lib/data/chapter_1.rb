@@ -1,19 +1,65 @@
-location :entrance do
+location :garden do
+  desc "The garden looks strangely well cultivated. Yet you havn't ordered anyone..
+        Black and red [roses] are blooming."
 
-  desc "" 
+  item :roses
 
-  remote_location :garden
-  remote_location :manor
+  remote_location :manor do
+    transition do
+      desc "You follow the earthy walkway to the entrance of the manor."
+    end
+  end
+
+  remote_location :gate
+
+  action :take do |item|
+    take item.to_sym
+  end
 end
 
-location :garden do
+location :gate do
+  desc "The gate is closed."
+ 
+  remote_location :garden
+  remote_location :manor
+
+  action :open do
+    puts "As hard as you try.. the door won't open. You're trapped."
+  end
 end
 
 location :manor do
-  remote_location :foyer
+  desc "The family manor - they say that there are secrets in
+        this house that should not be uncovered ever again.   
+
+        The well-sized [foyer] is infront of you."
+
+  on_enter do
+     music 'rain'
+  end
+
+  remote_location :foyer do
+    transition do
+      on_enter do
+        music 'night'
+      end
+    end
+  end
 end
 
 location :foyer do
+  desc "From the foyer various tight paths lead to the rooms of the manor.
+        Old unlit [candle]-lights are placed next to the walls. Strange."
+
+  action :take do |item|
+    if item == 'candle' then
+      puts "An inner shouder flows through your body as you approach one of the candles.
+            No - you can't bring yourself to do it."
+    else
+      unknown
+    end
+  end
+
   remote_location :kitchen
 end
 
@@ -87,5 +133,5 @@ location :kitchen do
 end
 
 location :store_room do
-  desc 'A deserted ... unfinished room.'
+  desc 'A deserted room.'
 end

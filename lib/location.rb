@@ -21,8 +21,6 @@ class Location
     super
   end
 
-  
-
   def connected_locations
     locations = []    
  
@@ -34,6 +32,16 @@ class Location
     locations |= remote_locations.find_all {|l| l.allows_transition_from? self}
   end
 
+  def unlock_location(named)
+    location = child_locations.find {|x| x.name == named }
+    location.allow_transition
+  end
+
+  def lock_location(named)
+    location = child_locations.find {|x| x.name == named }
+    location.disallow_transition
+  end
+  
   def connected_location_names
     connected_locations.map {|location| location.name}
   end

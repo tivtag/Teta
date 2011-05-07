@@ -43,5 +43,9 @@ module GameContextProvider
 
     player.add_item item
   end
+  
+  def change_to_chapter(index)
+    context.change_to_chapter index
+  end
 
 end

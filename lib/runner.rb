@@ -3,12 +3,17 @@ require_relative 'help_system'
 require_relative 'action_container'
 require_relative 'game_context'
 require_relative 'string_ext'
+require_relative 'location_builder'
+
+include LocationBuilder
 
 class Runner < GameContext
   include ActionContainer
 
   attr_reader :previous_location
   attr_accessor :locations, :location
+
+  DEBUG = true
 
   def initialize
     super
@@ -49,7 +54,7 @@ class Runner < GameContext
       end
     end
 
-    add_action :go, :goto do |location_name|
+    add_action :g, :goto do |location_name|
       available_locations = location.connected_locations
 
       if location_name then
@@ -94,16 +99,28 @@ class Runner < GameContext
       end
 
     end
+ 
+   if DEBUG then
+     add_action :music do |name|
+       MusicBox::play name
+     end
+   end
+   
   end
 
   def run
-    change_location locations.first
     print_location
- 
+
     while @running do
       step
     end
-   
+  end
+
+  def change_to_chapter(index)
+    @locations = parse_file "data/chapter_#{index}.rb"
+    @location = nil
+
+    change_location locations.first
   end
 
 private
@@ -133,12 +150,15 @@ private
     location.eval_action_safe(action, *args) or self.eval_action_safe(action, *args)
   end
 
-  def print_location   
+  def print_location  
     dirty_text = @location.description
-    lines = dirty_text.split("\n").map {|line| line.strip }
-    text = lines.join "\n"
     
-    puts text
+    if not dirty_text.nil? then
+      lines = dirty_text.split("\n").map {|line| line.strip }
+      text = lines.join "\n"
+    
+      puts text
+    end
   end
 
   def change_location(loc)
@@ -147,11 +167,12 @@ private
     @location = loc
     setup_location
 
-    transition = loc.find_transition_from(@previous_location)
+    transition = @location.find_transition_from(@previous_location)
     if transition != nil then
       transition.enter()
-      puts transition.text
+      puts transition.text unless transition.text.nil?
     end
+
   end
 
   def setup_location

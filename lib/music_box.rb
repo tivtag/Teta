@@ -5,6 +5,12 @@ class MusicBox
   MUSIC_PATH = '../media/music/'
   MUSIC_EXTS = ['.ogg', '.mp3']
 
+  FADE_OUT_TIME = 2  
+  FADE_IN_TIME = 4
+
+  @@current = nil
+  @@current_path = nil
+
   class << self
 
     def init
@@ -23,21 +29,37 @@ class MusicBox
         return nil
       end
 
-      path = sanitize_path path
-
-      # Load
-      music = SDL::Mixer::LoadMUS( path )
-      if music.to_ptr.null?
-        puts "ERROR: Could not load music: #{SDL::GetError()}"
-        return nil
+      if path == @@current_path then
+        return
       end
 
-      # Play
-      if SDL::Mixer::PlayMusic( music.to_ptr, -1 ) == -1
-        puts "ERROR: Could not play music: #{SDL::GetError()}"
-        return nil                                                                                                                                                 end
+      Thread.new() do
+        # Load
+        real_path = sanitize_path path
 
-      return music
+        music = SDL::Mixer::LoadMUS( real_path )
+        if music.to_ptr.null?
+          puts "ERROR: Could not load music: #{SDL::GetError()}"
+          return nil
+        end
+
+        # Fade Out
+        if @@current != nil then
+          SDL::Mixer::FadeOutMusic( FADE_OUT_TIME * 1000 )
+          sleep FADE_OUT_TIME 
+          @@current = nil
+        end
+
+        # Play
+        if SDL::Mixer::FadeInMusic( music.to_ptr, -1, FADE_IN_TIME * 1000 ) == -1
+          puts "ERROR: Could not play music: #{SDL::GetError()}"
+          return nil
+        end
+
+        @@current = music
+        @@current_path = path
+      end
+    
     end
 
     def sanitize_path(path)

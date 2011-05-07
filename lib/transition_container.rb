@@ -31,6 +31,14 @@ module TransitionContainer
     t
   end
 
+  def disallow_transition()
+    transition.allowed = false
+  end
+
+  def allow_transition()
+    transition.allowed = true
+  end
+
   def allows_transition_from?(from)
 
     if !transition.allowed then
@@ -51,7 +59,7 @@ module TransitionContainer
   end
 
   def find_transition_from(from)
-    if from.nil? then
+    if from.nil? or @transitions.length == 1 then
        transition
     else
        @transitions.find {|t| t.from.to_sym  == from.to_sym }
