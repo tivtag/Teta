@@ -23,7 +23,16 @@ describe Location do
     its(:connected_locations) { should be_empty }
     
     it 'does not know the name of the parent location' do
-      location.parent_location_name.should == nil
+      location.parent_location_name.should be_nil
+    end
+
+    it 'has a default transition state' do
+       tran = location.transitions.first
+       
+       tran.from.should == :any
+       tran.to.should === location
+       tran.text.should be_nil
+       tran.allowed.should be_true
     end
 
   end

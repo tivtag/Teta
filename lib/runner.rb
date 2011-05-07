@@ -65,6 +65,8 @@ class Runner < GameContext
 
       if loc then
         change_location loc
+        
+        puts
         print_location
       else
         puts "I can't go there." unless location_name == nil
@@ -116,11 +118,14 @@ private
 
   def handle(input)
     entries = input.split ' '
-    action = entries.first.intern
-    args   = entries[1..entries.length]
    
-    if not handle_action(action, args) then
-      puts "Huh..?"
+    if entries.length > 0 then
+      action = entries.first.intern
+      args   = entries[1..entries.length]
+   
+      if not handle_action(action, args) then
+        puts "Huh..?"
+      end
     end
   end
 
@@ -129,12 +134,22 @@ private
   end
 
   def print_location   
-    text = @location.description.gsub(/\n/, '').gsub(/ +/, ' ')
+    dirty_text = @location.description
+    lines = dirty_text.split("\n").map {|line| line.strip }
+    text = lines.join "\n"
+    
     puts text
   end
 
   def change_location(loc)
     @previous_location = @location
+
+    transition = loc.find_transition_from(@previous_location)
+    if transition != nil then
+      transition.notify()
+      puts transition.text
+    end
+
     @location = loc
     setup_location
   end

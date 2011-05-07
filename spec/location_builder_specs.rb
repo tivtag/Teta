@@ -171,4 +171,27 @@ describe LocationBuilder do
     end
 
   end
+
+  describe 'when parsing a Location that does not allow one to return' do
+    let(:data) do
+      lambda do
+        
+        location :hell do
+          transition { blocked }   
+        end
+
+      end
+    end
+
+    let(:loc) { parse(data).first }
+
+    it 'returns a Location whose transition is disabled' do
+      transition = loc.transitions.first
+
+      transition.from.should == :any
+      transition.to.should == loc
+      transition.allowed.should be_false
+    end
+  
+  end
 end

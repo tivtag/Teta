@@ -6,6 +6,13 @@ It uses:
   * rspec for testing
   * ruby-sdl-ffi to play music
 
+
+LINUX installation
+apt-get install libsdl1.2-dev
+gem install bundle
+bundle install
+
+
 Music:
 night.ogg - Quinn's Song: First Night 
 Kevin MacLeod (incompetech.com) Licensed under Creative Commons "Attribution 3.0" http://creativecommons.org/licenses/by/3.0/"

@@ -3,6 +3,7 @@ require_relative 'item_factory'
 
 module LocationBuilder
 
+  @@parent = nil
   @@locations = []
   @@obj_stack = []
   @@item_factory = ItemFactory.new
@@ -11,19 +12,29 @@ module LocationBuilder
     @@obj_stack.last
   end
 
+  def find_create_location(sym)
+    location = @@locations.find {|l| l.name == sym}
+
+    if location == nil then    
+      location = Location.new
+      location.name = sym
+      location.long_name = sym.to_s
+      
+      @@locations << location
+    end
+  
+    location
+  end
+
   def location(sym)
     parent_location = current_obj
-    
-    location = Location.new
-    location.name = sym
-    location.long_name = sym.to_s
-    
+    location = find_create_location sym
+
     if parent_location != nil then
       location.parent_location = parent_location
       parent_location.child_locations << location
     end
 
-    @@locations << location
     @@obj_stack.push location  
 
     yield # Here we let the DSL take-over again.
@@ -39,12 +50,32 @@ module LocationBuilder
     current_obj.description = text
   end
 
+  def transition()
+    t = current_obj.add_transition_from @@parent 
+
+    if block_given? then
+      block = Proc.new
+      t.instance_eval &block
+    end
+
+  end
+
   def remote_locations(*names)
     names.each { |name| remote_location name }
   end
 
   def remote_location(name)
+    location = find_create_location name
     current_obj.remote_locations << name
+
+    if block_given? then
+      @@parent = current_obj
+      @@obj_stack.push location  
+      yield 
+      @@obj_stack.pop
+      @@parent = nil
+    end
+  
   end
 
   def item(name, description = nil)

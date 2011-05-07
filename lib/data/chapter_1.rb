@@ -1,9 +1,27 @@
+location :entrance do
+
+  desc "" 
+
+  remote_location :garden
+  remote_location :manor
+end
+
+location :garden do
+end
+
+location :manor do
+  remote_location :foyer
+end
+
+location :foyer do
+  remote_location :kitchen
+end
 
 location :kitchen do
   
   desc 'A fading [fire] is illuminating the room. Wads of smoke are originating from the fire sink.
         The kitchen [floor] is made of strangely decorated marble plates.
-        You can hear water slowly trickeling from the water [dispenser].'  
+        You can hear water slowly trickeling from a water [dispenser].'  
 
   remote_location :store_room
 
@@ -13,7 +31,7 @@ location :kitchen do
           You have to force yourself to lift your view. The rest of the floor looks rather blank.
           In one of the corners lies an empty loam [bottle]."
 
-    item :bottle, 'A loam bottle. It is slightly damaged.'
+    item :bottle, 'A loam bottle. Slightly damaged.'
 
     action :take do |item|
       if take item then

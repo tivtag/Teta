@@ -4,14 +4,16 @@ require_relative 'music_box'
 
 include LocationBuilder
 
-puts
-puts "Welcome to Teta. Enter 'help' at any time."
-puts
-
 MusicBox.init
 MusicBox.play 'night'
 
-locations = parse_file('data/chapter_1.rb')
+puts
+puts "Welcome to a story by P. Ennemoser. Enter 'help' at any time."
+puts '--------------------------------------------------------------'
+puts
+puts
+
+locations = parse_file('data/chapter_0.rb')
 
 runner = Runner.new
 runner.locations = locations
