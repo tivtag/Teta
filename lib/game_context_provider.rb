@@ -1,4 +1,5 @@
 require_relative 'game_context'
+require_relative 'music_box'
 
 module GameContextProvider
   attr_accessor :context
@@ -21,4 +22,8 @@ module GameContextProvider
     puts 'Huh..?'
   end
 
+  def music(name)
+     MusicBox.play name
+  end
+  
 end

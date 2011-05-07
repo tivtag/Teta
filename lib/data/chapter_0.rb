@@ -1,18 +1,21 @@
 
 location :road do
 
-  desc "March 27 1926 - 11 P.M. A rainy autumn night.
-        
-        You feel so alone.. You've lost friends, your family..
-	It must have.. or.. was.. it..?
+  desc "June 27 1926 - 11 P.M. Rainy summer night.
+        At this strange night not even the moon dares to show itself - only half-diffunct street lights are trying to illuminate the chuckholed country road.
+       
+        Why are you here at this time? To find answers. To find out why they had to die. As you gaze into far distance your hope of finding what you seek comes nearer.
+        The old [manor] once was owned by your grand-grand parents. You hoped to renovate it after it stood empty for atleast two generations.
+        If you just had known that peculiar reasons earlier.."
 
-	You don't have time to waste. There must be clues at the family [manor]."
-
-   transition { blocked }
+   on_enter do
+     music 'rain'
+     block
+   end
 
    remote_location :manor do
      transition do
-        desc 'You approach with haste as the rain is getting stronger. You must find shelter soon.'
+        desc 'You approach the manor with haste as the rain is getting stronger. You must find shelter soon.'
      end	
    end
 end

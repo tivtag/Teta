@@ -3,7 +3,7 @@ require 'ruby-sdl-ffi'
 class MusicBox
 
   MUSIC_PATH = '../media/music/'
-  MUSIC_EXT = '.ogg'
+  MUSIC_EXTS = ['.ogg', '.mp3']
 
   class << self
 
@@ -44,12 +44,18 @@ class MusicBox
       if not path.include?('/') then
         path = MUSIC_PATH + path
       end
+        
+      full_path = path
 
-      if not path.end_with? MUSIC_EXT then
-        path = path + MUSIC_EXT
+      MUSIC_EXTS.each do |ext|
+         full_path = path + ext
+
+         if File.exists? full_path then
+            break 
+         end 
       end
 
-      path
+      full_path
     end
 
   end

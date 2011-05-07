@@ -51,7 +51,11 @@ module TransitionContainer
   end
 
   def find_transition_from(from)
-    @transitions.find {|t| t.from.to_sym  == from.to_sym } 
+    if from.nil? then
+       transition
+    else
+       @transitions.find {|t| t.from.to_sym  == from.to_sym }
+    end 
   end
 
 end

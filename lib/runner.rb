@@ -97,8 +97,8 @@ class Runner < GameContext
   end
 
   def run
-    setup_location
-    print_location 
+    change_location locations.first
+    print_location
  
     while @running do
       step
@@ -146,7 +146,7 @@ private
 
     transition = loc.find_transition_from(@previous_location)
     if transition != nil then
-      transition.notify()
+      transition.enter()
       puts transition.text
     end
 

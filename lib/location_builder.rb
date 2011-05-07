@@ -58,6 +58,14 @@ module LocationBuilder
       t.instance_eval &block
     end
 
+    t
+  end
+
+  # shortcut for transition { on_enter { .. } }
+  def on_enter()
+    transition do
+      self.instance_eval &Proc.new()     
+    end
   end
 
   def remote_locations(*names)
@@ -77,7 +85,7 @@ module LocationBuilder
     end
   
   end
-
+      
   def item(name, description = nil)
     item = @@item_factory.create(name)
 
