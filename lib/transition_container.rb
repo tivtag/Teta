@@ -10,7 +10,7 @@ module TransitionContainer
     add_transition_from :any
     super 
   end
-
+  
   def transition()
     @transitions.first
   end

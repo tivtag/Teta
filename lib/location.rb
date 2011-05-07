@@ -5,11 +5,11 @@ require_relative 'transition_container'
 require_relative 'game_context_provider'
 
 class Location
+  include GameContextProvider
   include ItemContainer
   include ActionContainer
   include ValueContainer
   include TransitionContainer
-  include GameContextProvider
 
   attr_accessor :name, :long_name, :description
   attr_accessor :parent_location, :child_locations, :remote_locations
@@ -20,6 +20,8 @@ class Location
 
     super
   end
+
+  
 
   def connected_locations
     locations = []    

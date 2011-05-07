@@ -17,7 +17,7 @@ class Runner < GameContext
     @help    = HelpSystem.new
     @running = true
 
-    add_action :quit do
+    add_action :quit, :exit do
       @running = false
     end
 
@@ -49,7 +49,7 @@ class Runner < GameContext
       end
     end
 
-    add_action :goto do |location_name|
+    add_action :go, :goto do |location_name|
       available_locations = location.connected_locations
 
       if location_name then
@@ -74,7 +74,7 @@ class Runner < GameContext
       end
     end
 
-    add_action :look do |item_name|
+    add_action :look, :lookat do |item_name|
     
       if item_name then
         item = player.find_item_named_like item_name
@@ -144,14 +144,14 @@ private
   def change_location(loc)
     @previous_location = @location
 
+    @location = loc
+    setup_location
+
     transition = loc.find_transition_from(@previous_location)
     if transition != nil then
       transition.enter()
       puts transition.text
     end
-
-    @location = loc
-    setup_location
   end
 
   def setup_location

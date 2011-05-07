@@ -63,8 +63,10 @@ module LocationBuilder
 
   # shortcut for transition { on_enter { .. } }
   def on_enter()
+    block = Proc.new()
+ 
     transition do
-      self.instance_eval &Proc.new()     
+      on_enter &block
     end
   end
 

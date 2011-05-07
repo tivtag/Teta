@@ -12,6 +12,10 @@ class Transition
     @walk_count = 0
   end
 
+  def context()
+    @to.context
+  end
+
   def enter()
     notify
 

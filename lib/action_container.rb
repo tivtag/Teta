@@ -6,8 +6,10 @@ module ActionContainer
     super
   end
 
-  def add_action(symbol, &block)
-    @actions[symbol] = block
+  def add_action(*symbols, &block)
+    symbols.each do |symbol|  
+      @actions[symbol] = block
+    end
   end
 
   def has_action?(symbol)

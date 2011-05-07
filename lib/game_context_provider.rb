@@ -5,9 +5,12 @@ module GameContextProvider
   attr_accessor :context
 
   def player
-    @context.player
+    context.player
   end
 
+  # 
+  # DSL hooks:
+  #
   def remove_player(item, expected_item)
     item = item.intern
 
@@ -26,4 +29,19 @@ module GameContextProvider
      MusicBox.play name
   end
   
+  def give_new_item(name, description=nil)
+    item = context.item_factory.create(name)
+
+    if description != nil then
+      item.description = description
+    end
+
+    if block_given? then
+      block = Proc.new
+      item.instance_eval &block
+    end
+
+    player.add_item item
+  end
+
 end

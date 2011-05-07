@@ -7,10 +7,12 @@ location :road do
         Why are you here at this time? To find answers. To find out why they had to die. As you gaze into far distance your hope of finding what you seek comes nearer.
         The old [manor] once was owned by your grand-grand parents. You hoped to renovate it after it stood empty for atleast two generations.
         If you just had known that peculiar reasons earlier.."
-
+   
    on_enter do
      music 'rain'
      block
+
+     give_new_item :key, 'A large rusty key. It mimics a snake head.'
    end
 
    remote_location :manor do
