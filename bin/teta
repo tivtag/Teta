@@ -1,0 +1,6 @@
+Dir.chdir File.dirname(__FILE__)  
+Dir.chdir '../lib/' 
+ 
+require_relative '../lib/main' 
+
+
