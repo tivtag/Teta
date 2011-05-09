@@ -1,3 +1,4 @@
+
 location :garden do
   desc "The garden looks strangely well cultivated. Yet you havn't ordered anyone..
         Black and red [roses] are blooming."
@@ -18,13 +19,39 @@ location :garden do
 end
 
 location :gate do
-  desc "The gate is closed."
+  desc "The gate is closed. You can see a toggle [switch]."
  
   remote_location :garden
   remote_location :manor
 
   action :open do
-    puts "As hard as you try.. the door won't open. You're trapped."
+    puts "As hard as you try.. the gate won't open. You're trapped."
+  end
+
+  action :use do |obj|
+    if obj == 'switch' then
+      puts 'As you pull the toggle switch down the once solid wooden floor below you opens and pulls you down.'
+    
+      choice 'What was your next action? Quickly [jump] away? Attempt to [hold] at the edge? Or [nothing]?', 
+      jump:-> { 
+        puts "The jump was not successful."
+        die 
+      },
+      hold:-> {
+        puts "Phew. That was close. After you've pulled yourself up the wood plate
+             moved back to its original position. You might not want to pull the switch again."
+      },
+      nothing:-> { 
+        puts "You fall to your death!"
+        die
+      },
+      other:-> {
+        puts 'Uhuh.. no.. just no.'
+        die
+      }
+    else
+      unknown
+    end
   end
 end
 

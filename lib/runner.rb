@@ -104,6 +104,11 @@ class Runner < GameContext
      add_action :music do |name|
        MusicBox::play name
      end
+
+     add_action :changechapter do |index|
+       change_to_chapter index
+       print_location
+     end
    end
    
   end
@@ -123,14 +128,28 @@ class Runner < GameContext
     change_location locations.first
   end
 
-private
-  def step
-      handle read_input
+  def die(reason = 'You died..')
+     puts reason
+     @running = false
   end
 
   def read_input
      print '> '
      gets.chomp    
+  end
+
+  def print_text(dirty_text)
+    if not dirty_text.nil? then
+      lines = dirty_text.split("\n").map {|line| line.strip }
+      text = lines.join "\n"
+    
+      puts text
+    end
+  end
+
+private
+  def step
+      handle read_input
   end
 
   def handle(input)
@@ -151,14 +170,7 @@ private
   end
 
   def print_location  
-    dirty_text = @location.description
-    
-    if not dirty_text.nil? then
-      lines = dirty_text.split("\n").map {|line| line.strip }
-      text = lines.join "\n"
-    
-      puts text
-    end
+    print_text @location.description 
   end
 
   def change_location(loc)

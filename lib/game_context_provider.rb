@@ -1,7 +1,10 @@
 require_relative 'game_context'
 require_relative 'music_box'
+require_relative 'dsl/choices'
 
 module GameContextProvider
+  include Choices
+
   attr_accessor :context
 
   def player
@@ -23,6 +26,14 @@ module GameContextProvider
 
   def unknown
     puts 'Huh..?'
+  end
+
+  def read_input
+    context.read_input
+  end
+
+  def println(text)
+    context.print_text text
   end
 
   def music(name)
@@ -47,5 +58,9 @@ module GameContextProvider
   def change_to_chapter(index)
     context.change_to_chapter index
   end
-
+  
+  def die
+    context.die
+  end
+   
 end
