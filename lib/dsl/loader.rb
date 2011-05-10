@@ -1,7 +1,8 @@
-require_relative 'location'
-require_relative 'item_factory'
+require_relative '../location'
+require_relative '../item_factory'
 
-module LocationBuilder
+module DSL 
+  module Loader
 
   @@parent = nil
   @@locations = []
@@ -168,4 +169,6 @@ module LocationBuilder
     locations
   end
 
+  end
 end
+

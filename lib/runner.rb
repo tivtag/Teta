@@ -3,9 +3,9 @@ require_relative 'help_system'
 require_relative 'action_container'
 require_relative 'game_context'
 require_relative 'string_ext'
-require_relative 'location_builder'
+require_relative 'dsl/loader'
 
-include LocationBuilder
+include DSL::Loader
 
 class Runner < GameContext
   include ActionContainer

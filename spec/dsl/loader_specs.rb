@@ -1,7 +1,7 @@
-require_relative '../lib/location_builder.rb'
-include LocationBuilder
+require_relative '../../lib/dsl/loader.rb'
+include DSL::Loader
 
-describe LocationBuilder do
+describe DSL::Loader do
  
   describe 'when parsing a single simple Location' do
      

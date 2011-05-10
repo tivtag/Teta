@@ -1,5 +1,6 @@
 
-module Choices
+module DSL
+  module Choices
 
   def choice(text, actions)
     println text
@@ -24,5 +25,6 @@ module Choices
     end
   end
 
+  end
 end
 
