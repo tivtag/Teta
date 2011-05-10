@@ -75,7 +75,7 @@ class Runner < GameContext
         print_location
       else
         puts "I can't go there." unless location_name == nil
-        available_locations.each {|loc| puts "    #{loc.name}"}        
+        available_locations.each {|l| puts "    #{l.name}"}        
       end
     end
 

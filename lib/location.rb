@@ -71,9 +71,8 @@ class Location
   end
 
   # DSL hooks:
-
   def remove_last_sentence
-    sentences = @description.scan /.*?[.!?](?:\s|$)/
+    sentences = @description.scan(/.*?[.!?](?:\s|$)/)
     
     if sentences.length > 1 then
       @description = sentences[0..sentences.length - 2].join

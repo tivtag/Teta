@@ -56,7 +56,7 @@ module DSL
 
     if block_given? then
       block = Proc.new
-      t.instance_eval &block
+      t.instance_eval(&block)
     end
 
     t
@@ -67,7 +67,7 @@ module DSL
     block = Proc.new()
  
     transition do
-      on_enter &block
+      on_enter(&block)
     end
   end
 
@@ -98,7 +98,7 @@ module DSL
 
     if block_given? then
       block = Proc.new
-      item.instance_eval &block
+      item.instance_eval(&block)
     end
 
     current_obj.add_item item

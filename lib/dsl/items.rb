@@ -21,7 +21,7 @@ module DSL
 
     if block_given? then
       block = Proc.new
-      item.instance_eval &block
+      item.instance_eval block
     end
 
     player.add_item item

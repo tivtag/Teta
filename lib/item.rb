@@ -5,7 +5,7 @@ class Item
 
   def name=(symbol)
     @name = symbol
-    @long_name = symbol.to_s.gsub(/_/, ' ') if @long_name == nil
+    @long_name ||= symbol.to_s.gsub(/_/, ' ')
   end
 
   # DSL hooks:

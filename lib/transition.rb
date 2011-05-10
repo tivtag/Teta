@@ -20,7 +20,7 @@ class Transition
     notify
 
     if @entered != nil then
-      self.instance_eval &@entered
+      self.instance_eval(&@entered)
     end
   end
 
