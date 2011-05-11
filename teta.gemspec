@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.executables = ['teta'] 
   s.require_paths = ["lib"]
   s.bindir = 'bin'
-  s.files = FileList['lib/*.rb', 'lib/**/*.rb', 'bin/*', 'media/**/*'].to_a
+  s.files = FileList['lib/*.rb', 'lib/**/*.rb', 'bin/*', 'story/*.rb', 'media/**/*'].to_a
 
   puts
   puts s.files
