@@ -14,8 +14,3 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.bindir = 'bin'
   s.files = FileList['lib/*.rb', 'lib/**/*.rb', 'bin/*', 'story/*.rb', 'media/**/*'].to_a
-
-  puts
-  puts s.files
-  puts
-end

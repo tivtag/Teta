@@ -11,5 +11,7 @@ puts
 
 runner = Runner.new
 
-runner.change_to_chapter 0
-runner.run
+if not defined?(Ocra)
+  runner.change_to_chapter 0
+  runner.run
+end
