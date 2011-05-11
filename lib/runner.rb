@@ -14,6 +14,7 @@ class Runner < GameContext
   attr_accessor :locations, :location
 
   DEBUG = true
+  STORY_FOLDER = "../story/"
 
   def initialize
     super
@@ -122,7 +123,7 @@ class Runner < GameContext
   end
 
   def change_to_chapter(index)
-    @locations = parse_file "data/chapter_#{index}.rb"
+    @locations = parse_file "#{STORY_FOLDER}/chapter_#{index}.rb"
     @location = nil
 
     change_location locations.first
