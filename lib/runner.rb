@@ -1,4 +1,4 @@
-require 'rb-readline'
+require_relative 'input_output'
 require_relative 'location'
 require_relative 'help_system'
 require_relative 'action_container'
@@ -10,6 +10,7 @@ include DSL::Loader
 
 class Runner < GameContext
   include ActionContainer
+  include InputOutput
 
   attr_reader :previous_location
   attr_accessor :locations, :location
@@ -133,24 +134,6 @@ class Runner < GameContext
   def die(reason = 'You died..')
      puts reason
      @running = false
-  end
-
-  def read_input
-    begin
-      Readline.readline('> ', true)
-    rescue Interrupt
-      @running = false
-      ""
-    end
-  end
-
-  def print_text(dirty_text)
-    if not dirty_text.nil? then
-      lines = dirty_text.split("\n").map {|line| line.strip }
-      text = lines.join "\n"
-    
-      puts text
-    end
   end
 
 private
