@@ -1,3 +1,4 @@
+require 'rb-readline'
 require_relative 'location'
 require_relative 'help_system'
 require_relative 'action_container'
@@ -135,8 +136,12 @@ class Runner < GameContext
   end
 
   def read_input
-     print '> '
-     gets.chomp    
+    begin
+      Readline.readline('> ', true)
+    rescue Interrupt
+      @running = false
+      ""
+    end
   end
 
   def print_text(dirty_text)
