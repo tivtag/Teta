@@ -6,7 +6,7 @@ gem 'rb-readline'
 
 group :development do
   gem 'rspec'
-  gem "ocra", :platforms => :mswin
+  gem "ocra", :platforms => [:mingw, :mswin]
 end
 
 

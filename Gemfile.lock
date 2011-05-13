@@ -12,14 +12,15 @@ GEM
     nice-ffi (0.4)
       ffi (>= 0.5.0)
     rake (0.8.7)
-    rspec (2.5.0)
-      rspec-core (~> 2.5.0)
-      rspec-expectations (~> 2.5.0)
-      rspec-mocks (~> 2.5.0)
-    rspec-core (2.5.2)
-    rspec-expectations (2.5.0)
+    rb-readline (0.4.0)
+    rspec (2.6.0)
+      rspec-core (~> 2.6.0)
+      rspec-expectations (~> 2.6.0)
+      rspec-mocks (~> 2.6.0)
+    rspec-core (2.6.0)
+    rspec-expectations (2.6.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.5.0)
+    rspec-mocks (2.6.0)
     ruby-sdl-ffi (0.4)
       nice-ffi (>= 0.2)
 
@@ -28,6 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   ocra
+  rb-readline
   rspec
   ruby-sdl-ffi
   teta!
