@@ -25,7 +25,7 @@ class Runner < GameContext
     @help    = HelpSystem.new
     @running = true
 
-    add_action :quit, :exit do
+    add_action :q, :quit, :exit do
       @running = false
     end
 
@@ -47,7 +47,7 @@ class Runner < GameContext
       end
     end
 
-    add_action :inv do
+    add_action :i, :inv do
       if player.items.length > 0 then
         @player.items.each do |item|
           puts "1x #{item.long_name}"
@@ -82,7 +82,7 @@ class Runner < GameContext
       end
     end
 
-    add_action :look, :lookat do |item_name|
+    add_action :l, :look, :lookat do |item_name|
     
       if item_name then
         item = player.find_item_named_like item_name
@@ -173,7 +173,6 @@ private
       transition.enter()
       puts transition.text unless transition.text.nil?
     end
-
   end
 
   def setup_location
