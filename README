@@ -5,7 +5,7 @@ data.
 It uses:
   * rspec for testing
   * ruby-sdl-ffi to play music
-  * ocra to create the stand-adlone Windows executeable
+  * ocra to create the stand-alone Windows executeable
   * rb-readline for the command history
 
 
