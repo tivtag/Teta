@@ -13,5 +13,6 @@ describe HelpSystem do
   it { should have_command(:quit) }
   it { should have_command(:look) }
   it { should have_command(:use) }
+  it { should have_command(:cls) }
 
 end

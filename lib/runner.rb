@@ -5,12 +5,15 @@ require_relative 'action_container'
 require_relative 'game_context'
 require_relative 'string_ext'
 require_relative 'dsl/loader'
+require_relative 'mechanics/all'
 
 include DSL::Loader
 
 class Runner < GameContext
   include ActionContainer
   include InputOutput
+  include Mechanics::LookAt
+  include Mechanics::Goto
 
   attr_reader :previous_location
   attr_accessor :locations, :location
@@ -34,86 +37,35 @@ class Runner < GameContext
     end
     
     add_action :go do |dir|
-      case dir
-      when 'back', 'b'
-        if @previous_location && @location.connected?(@previous_location) then
-          change_location @previous_location
-          print_location
-        else
-          puts 'This is impossible!' 
-        end
-      else
-        puts "I can't do that."
-      end
+      go dir
     end
 
     add_action :i, :inv do
-      if player.items.length > 0 then
-        @player.items.each do |item|
-          puts "1x #{item.long_name}"
-        end
-      else
-        puts '~ empty ~'
-      end
+      show_inv
     end
 
-    add_action :g, :goto do |location_name|
-      available_locations = location.connected_locations
-
-      if location_name then
-        loc = available_locations.find {|child| child.name == location_name.intern}
-
-        # Allow the user to enter 'fi' to go to 'fire':
-        if not loc then
-          loc = available_locations.find {|child| child.name.to_s.start_set.include? location_name.to_s } 
-        end
-      else
-        loc = nil
-      end
-
-      if loc then
-        change_location loc
-        
-        puts
-        print_location
-      else
-        puts "I can't go there." unless location_name == nil
-        available_locations.each {|l| puts "    #{l.name}"}        
-      end
+    add_action :g, :goto do |location|
+      goto location
     end
 
-    add_action :l, :look, :lookat do |item_name|
-    
-      if item_name then
-        item = player.find_item_named_like item_name
-
-        if item then
-          if item.description then
-            puts item.description
-          else
-            puts 'There is nothing special about this item.'
-          end
-        else
-          puts 'Nothing to look at.'
-        end
-
-      else
-        print_location
-      end
-
+    add_action :l, :look, :lookat do |obj| 
+      lookat obj
     end
  
-   if DEBUG then
-     add_action :music do |name|
-       MusicBox::play name
-     end
+    add_action :cls do
+      system('clear') 
+    end
 
-     add_action :changechapter do |index|
-       change_to_chapter index
-       print_location
-     end
-   end
-   
+    if DEBUG then
+      add_action :music do |name|
+        MusicBox::play name
+      end
+
+      add_action :changechapter do |index|
+        change_to_chapter index
+        print_location
+      end
+    end
   end
 
   def run
@@ -179,4 +131,15 @@ private
     @location.context = self
   end
 
+  def show_inv
+    if player.items.length > 0 then
+      @player.items.each do |item|
+        puts "1x #{item.long_name}"
+      end
+    else
+      puts '~ empty ~'
+    end
+  end
+
 end
+

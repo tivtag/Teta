@@ -8,21 +8,16 @@ module GameContextProvider
   include DSL::Items
 
   attr_accessor :context
-
-  def player
-    context.player
+ 
+  def method_missing(name, *args)
+    context.send(name, *args)
   end
 
-  # 
   # DSL hooks:
   #
 
   def unknown
     puts 'Huh..?'
-  end
-
-  def read_input
-    context.read_input
   end
 
   def println(text)
@@ -31,15 +26,6 @@ module GameContextProvider
 
   def music(name)
      MusicBox.play name
-  end
-  
-  
-  def change_to_chapter(index)
-    context.change_to_chapter index
-  end
-  
-  def die
-    context.die
   end
    
 end

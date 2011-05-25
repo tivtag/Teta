@@ -27,6 +27,7 @@ class HelpSystem
         puts 'inv         - Shows the content of your inventory.'
         puts 'use [obj]   - Uses an object in the current location or your inventory.'
         puts 'look [name] - Looks at the inventory object with the given [name].'
+        puts 'cls         - Clears the screen of text.'
         puts 'help [cmd]  - Shows extended help about the given [command].'
       end
 
@@ -69,6 +70,12 @@ class HelpSystem
       def use
         puts 'Uses an item in your inventory at the current location or uses an object at the current location.'
         puts '  Example usage: "use bottle"'
+      end
+
+      def cls
+        puts 'Clears the screen from all text but the input prompt.'
+        puts 'Use "lookat" to show the description of the current location.'
+        puts '  Example usage: "cls"'
       end
     end
   end
