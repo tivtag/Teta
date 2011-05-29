@@ -1,4 +1,5 @@
 require_relative '../lib/location'
+require 'shared/game_object_specs'
 require 'shared/item_container_specs'
 require 'shared/action_container_specs'
 require 'shared/game_context_provider_specs'
@@ -9,16 +10,12 @@ describe Location do
   it_behaves_like 'an ActionContainer'
   it_behaves_like 'a GameContextProvider'
   it_behaves_like 'a ValueContainer'
+  it_behaves_like 'a GameObject'
 
   let(:location) { Location.new }
   subject { location }  
 
   context 'when first created' do
-   
-    its(:name)            { should be_nil }
-    its(:description)     { should be_nil }
-    its(:long_name)       { should be_nil }
-
     its(:child_locations)     { should be_empty }
     its(:connected_locations) { should be_empty }
     

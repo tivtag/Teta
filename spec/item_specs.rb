@@ -1,14 +1,12 @@
 require_relative '../lib/item'
+require 'shared/game_object_specs'
 
 describe Item do
-
+  it_behaves_like 'a GameObject'
+  
   context 'when initialized' do
     let(:item) { Item.new }
     subject { item }
-
-    its(:name)        { should be_nil }
-    its(:long_name)   { should be_nil }
-    its(:description) { should be_nil }
 
     context 'when name is set to :red_coin' do
       before do 
