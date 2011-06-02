@@ -1,4 +1,5 @@
 require_relative '../../lib/dsl/choices'
+require 'spec_helper'
 
 class ChoicesContextMock
   include DSL::Choices

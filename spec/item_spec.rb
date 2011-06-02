@@ -1,5 +1,6 @@
 require_relative '../lib/item'
-require 'shared/game_object_specs'
+require 'shared/game_object'
+require 'spec_helper'
 
 describe Item do
   it_behaves_like 'a GameObject'

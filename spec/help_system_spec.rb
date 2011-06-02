@@ -1,4 +1,5 @@
 require_relative '../lib/help_system'
+require 'spec_helper'
 
 describe HelpSystem do
 

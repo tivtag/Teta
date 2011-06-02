@@ -1,4 +1,5 @@
 require_relative '../lib/game_context'
+require 'spec_helper'
 
 describe GameContext do
 

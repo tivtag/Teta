@@ -1,6 +1,7 @@
 require_relative '../../lib/dsl/loader.rb'
-include DSL::Loader
+require 'spec_helper'
 
+include DSL::Loader
 describe DSL::Loader do
  
   describe 'when parsing a single simple Location' do

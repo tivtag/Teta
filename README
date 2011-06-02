@@ -3,10 +3,12 @@ that uses an Internal Domain Specific Language to describe the game
 data.
 
 It uses:
-  * rspec for testing
-  * ruby-sdl-ffi to play music
-  * ocra to create the stand-alone Windows executeable
+  * ruby-sdl-ffi to play musicV
   * rb-readline for the command history
+  * rspec for testing
+  * ocra to create the stand-alone Windows executeable
+  * metric_fu to capture various code quality metrics
+  * simplecov to calculate spec coverage
 
 
 LINUX installation

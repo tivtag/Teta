@@ -1,9 +1,10 @@
 require_relative '../lib/location'
-require 'shared/game_object_specs'
-require 'shared/item_container_specs'
-require 'shared/action_container_specs'
-require 'shared/game_context_provider_specs'
-require 'shared/value_container_specs'
+require 'shared/game_object'
+require 'shared/item_container'
+require 'shared/action_container'
+require 'shared/game_context_provider'
+require 'shared/value_container'
+require 'spec_helper'
 
 describe Location do
   it_behaves_like 'an ItemContainer'

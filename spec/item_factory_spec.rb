@@ -1,4 +1,5 @@
 require_relative '../lib/item_factory'
+require 'spec_helper'
 
 describe ItemFactory do
 
