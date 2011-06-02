@@ -87,7 +87,10 @@ describe DSL::Choices do
           context.choice message, 
             fight:-> { @called_fight = true },
             fea:-> { @called_flee = true },
-            other:-> { @called_other = true }
+            other:->(input) { 
+              @input = input
+              @called_other = true
+            }
         end
 
         it 'excutes none of the normal actions' do
@@ -97,6 +100,10 @@ describe DSL::Choices do
 
         it 'executes the :other action' do
           @called_other.should be_true
+        end
+
+        it 'passes the entered text into the :other action' do
+          @input.should == :flee
         end
 
         it 'does not call for an unknown action' do

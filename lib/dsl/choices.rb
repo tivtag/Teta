@@ -10,18 +10,16 @@ module DSL
     
     if action.nil? then
       action = actions[:other]
-      
-      if action.nil? then
-        unknown
-      else
-        if action.arity == 0 then
-          action.call
-        else
-          action.call input
-        end
-      end
+    end
+
+    if action.nil? then
+      unknown
     else
-      action.call 
+      if action.arity == 0 then
+        action.call
+      else
+        action.call input
+      end
     end
   end
 

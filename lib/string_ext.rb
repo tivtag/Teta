@@ -1,6 +1,10 @@
 
 class String
 
+  def start_with_any?(text)
+    start_set.include? text.to_s
+  end
+
   def start_set
     entries = []
     
@@ -12,3 +16,4 @@ class String
   end
 
 end
+

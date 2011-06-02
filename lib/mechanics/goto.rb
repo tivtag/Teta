@@ -10,7 +10,7 @@ module Mechanics
 
         # Allow the user to enter 'fi' to go to 'fire':
         if not loc then
-          loc = available_locations.find {|child| child.name.to_s.start_set.include? location_name.to_s } 
+          loc = available_locations.find {|child| child.name.to_s.start_with_any? location_name } 
         end
       else
         loc = nil

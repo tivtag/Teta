@@ -16,9 +16,10 @@ shared_examples_for 'an ItemContainer' do
     end   
  
     context 'after adding one Item' do
+      let(:potion) { factory.create(:potion) }
 
       before do
-        container.add_item factory.create(:potion)
+        container.add_item potion
       end
 
       it 'contains the added Item' do
@@ -28,7 +29,23 @@ shared_examples_for 'an ItemContainer' do
       it "does not contain an Item that wasn't added" do
         container.has_item?(:water).should be_false
       end
-       
+
+      it "can find the Item by any text that the name of the Item starts with" do
+        names = [:p, :po, :pot, :poti, :potio, :potion]
+        names.should be_all { |name|
+          item = container.find_item_named_like name
+          item == potion
+        }
+      end
+
+      it "won't find any Item when searching for an unknown name" do
+        names = [:tion, :b, :dot, :oti, :candle, :tree]
+        names.should be_all { |name|
+          item = container.find_item_named_like name
+          item.nil?
+        }
+      end
+
       context 'and removing the Item again' do
         before do
           @item = container.remove_item :potion
@@ -46,7 +63,7 @@ shared_examples_for 'an ItemContainer' do
     end
 
     context 'after adding multiple Items' do
-      let(:item_names) { [:bag, :coin, :sweets] }
+      let(:item_names) { [:bag, :coin, :sweets, :coffee] }
 
       before do
         items = factory.create_all(item_names)
@@ -57,8 +74,13 @@ shared_examples_for 'an ItemContainer' do
         container.has_items?(item_names).should be_true
       end
 
-      it 'but does not contain Items that were not added' do
+      it 'does not contain Items that were not added' do
         container.has_items?(item_names << :hat).should be_false
+      end
+
+      it 'will find the first occurrence when searching by similiarty' do
+        item = container.find_item_named_like 'co'
+        item.name.should == :coin
       end
 
       context 'after removing all Items' do
@@ -104,6 +126,6 @@ shared_examples_for 'an ItemContainer' do
         item.should be_nil
       end
     end
-
   end
+
 end

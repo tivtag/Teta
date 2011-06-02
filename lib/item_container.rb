@@ -33,7 +33,7 @@ module ItemContainer
   end
  
   def find_item_named_like(text)
-    @items.find {|item| item.name.to_s.start_set.include? text }
+    @items.find {|item| item.name.to_s.start_with_any? text }
   end
 
   def remove_item(name)
