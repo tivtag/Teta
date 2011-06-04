@@ -34,6 +34,8 @@ module DSL
     if parent_location != nil then
       location.parent_location = parent_location
       parent_location.child_locations << location
+
+      location.add_transition parent_location
     end
 
     @@obj_stack.push location  
@@ -52,7 +54,7 @@ module DSL
   end
 
   def transition()
-    t = current_obj.add_transition_from @@parent 
+    t = current_obj.add_transition @@parent 
 
     if block_given? then
       block = Proc.new
@@ -62,13 +64,26 @@ module DSL
     t
   end
 
-  # shortcut for transition { on_enter { .. } }
   def on_enter()
     block = Proc.new()
- 
+    current_obj.on_enter(&block)
+  end
+
+  def on_leave()
+    block = Proc.new()
+    current_obj.on_leave(&block)
+  end
+
+  def on_walk()
+    block = Proc.new()
+    
     transition do
-      on_enter(&block)
+      on_walk &block
     end
+  end
+
+  def blocked()
+    current_obj.blocked
   end
 
   def remote_locations(*names)
@@ -78,6 +93,7 @@ module DSL
   def remote_location(name)
     location = find_create_location name
     current_obj.remote_locations << name
+    current_obj.add_transition location
 
     if block_given? then
       @@parent = current_obj
@@ -165,8 +181,14 @@ module DSL
     mirror_remote_locations
 
     locations = @@locations.clone
-    @@locations.clear
+    clean_loader
     locations
+  end
+
+  def clean_loader
+    @@parent = nil
+    @@locations.clear
+    @@obj_stack.clear
   end
 
   end

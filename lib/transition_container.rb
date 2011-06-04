@@ -1,68 +1,67 @@
 require_relative 'transition'
 
 module TransitionContainer
-
   attr_reader :transitions
 
   def initialize()
     @transitions = []
     
-    add_transition_from :any
     super 
   end
   
-  def transition()
-    @transitions.first
-  end
+  def add_transition(node)
+    throw "Parameter 'node'(#{node.class}) must include TransitionNode" unless node.kind_of?(TransitionNode)
 
-  def add_transition_from(from)
-    
-    from = from || :any
-    t = find_transition_from from
+    t = find_transition node
 
     if t == nil then
       t = Transition.new()
-      t.from = from
-      t.to = self
+      t.a = node
+      t.b = self
     
       @transitions << t
+      node.transitions << t
     end
 
     t
   end
 
   def disallow_transition()
-    transition.allowed = false
+    for_all_transitions do
+      allowed = false
+    end
   end
 
   def allow_transition()
-    transition.allowed = true
+    for_all_transitions do
+      allowed = true
+    end
+  end
+
+  def for_all_transitions(&block)
+    @transitions.each {|t| t.instance_eval(&block) }
   end
 
   def allows_transition_from?(from)
-
-    if !transition.allowed then
-       return false
-    end      
-
-    if from == :any || @transitions.length == 1 then
-      return true
+    from ||= :any
+    if from == :any || @transitions.length == 0 then
+      return allows_entry 
     end
 
-    t = find_transition_from from
+    t = find_transition from
 
     if t != nil then
-      t.allowed
+      t.is_allowed?(from, self)
     else
       false
     end
   end
 
-  def find_transition_from(from)
-    if from.nil? or @transitions.length == 1 then
-       transition
+  def find_transition(node)
+    if node.nil? then
+       nil
     else
-       @transitions.find {|t| t.from.to_sym  == from.to_sym }
+       @transitions.find {|t| t.has_node? node}
     end 
   end
 

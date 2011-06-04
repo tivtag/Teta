@@ -85,13 +85,10 @@ location :manor do
      end
 
      location :garden do
-       transition do
-         blocked 
-         
-         on_enter do
-           change_to_chapter 1
-         end
+       blocked
 
+       on_enter do
+         change_to_chapter 1
        end
      end
   end

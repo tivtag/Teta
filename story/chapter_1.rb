@@ -3,7 +3,7 @@ location :garden do
   desc "The garden looks strangely well cultivated. Yet you havn't ordered anyone..
         Black and red [roses] are blooming."
 
-  item :roses
+  item :roses, 'Smells wonderful. How kitschy!'
 
   remote_location :manor do
     transition do
@@ -39,7 +39,7 @@ location :gate do
       },
       hold:-> {
         puts "Phew. That was close. After you've pulled yourself up the wood plate
-             moved back to its original position. You might not want to pull the switch again."
+              moved back to its original position. You might not want to pull the switch again."
       },
       nothing:-> { 
         puts "You fall to your death!"
@@ -76,7 +76,8 @@ end
 
 location :foyer do
   desc "From the foyer various tight paths lead to the rooms of the manor.
-        Old unlit [candle]-lights are placed next to the walls. Strange."
+        Old unlit [candle]-lights are placed next to the walls. Strange.
+        A stenching smell of burning flesh seems to come from the [kitchen]. "
 
   action :take do |item|
     if item == 'candle' then
@@ -137,6 +138,8 @@ location :kitchen do
     action :take do
       if itis :safe then 
          take :gold_coin
+         puts 'The demo ends here for now. :('
+
          unset :safe
          desc 'The fire in the sink has re-ignited. Too hot!'
       else 
@@ -162,3 +165,4 @@ end
 location :store_room do
   desc 'A deserted room.'
 end
+

@@ -1,9 +1,11 @@
 require_relative 'game_object'
+require_relative 'transition_node'
 require_relative 'item_container'
 require_relative 'action_container'
 require_relative 'value_container'
 require_relative 'transition_container'
 require_relative 'game_context_provider'
+require_relative 'string_ext'
 
 class Location < GameObject
   include GameContextProvider
@@ -11,6 +13,7 @@ class Location < GameObject
   include ActionContainer
   include ValueContainer
   include TransitionContainer
+  include TransitionNode
 
   attr_accessor :parent_location, :child_locations, :remote_locations
 
@@ -34,12 +37,16 @@ class Location < GameObject
 
   def unlock_location(named)
     location = child_locations.find {|x| x.name == named }
-    location.allow_transition
+    if location.nil? then
+      raise "Could not find location '#{named}'."
+    end
+
+    location.unblock
   end
 
   def lock_location(named)
     location = child_locations.find {|x| x.name == named }
-    location.disallow_transition
+    location.block
   end
   
   def connected_location_names
@@ -56,6 +63,35 @@ class Location < GameObject
   
   def connected?(location)
     connected_locations.include? location
+  end
+
+  def transition_to(location)
+    if location.nil? then
+      return nil
+    end
+
+    transition = location.find_transition self
+    
+    if transition != nil then
+      if not transition.is_allowed?(self, location) then
+        return nil
+      end      
+
+      self.leave(location, transition) 
+      transition.walk(self, location)
+      location.enter(self, transition)
+    end
+
+    transition
+  end
+
+  def transition_from(location)
+    if location.nil? then
+      self.enter(nil, nil)
+      true
+    else
+      location.transition_to self
+    end
   end
 
   def to_s

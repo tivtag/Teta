@@ -25,4 +25,16 @@ shared_examples_for 'a ValueContainer' do
     end
   end
 
+  context 'after setting the value :counter to 10' do
+    before do
+      container.set :counter, 10
+    end
+
+    it { should have_value(:counter) }
+    it "should get the value 10 from the container" do
+      container.get(:counter).should == 10
+    end
+
+  end
+
 end

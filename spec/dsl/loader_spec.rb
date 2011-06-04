@@ -18,6 +18,10 @@ describe DSL::Loader do
     let(:locations) { parse(data) }
     subject { locations.first }
  
+    it 'returns a location' do
+      should_not be_nil
+    end
+    
     it 'returns a single Location' do
       locations.length.should == 1
     end
@@ -103,8 +107,7 @@ describe DSL::Loader do
     end
   end
 
-  describe 'when parsing a Location that is remotely connected to another Location' do
-
+  describe 'when parsing Locations that are remotely connected to other Locations' do
     let(:data) do
       lambda do
         
@@ -135,14 +138,14 @@ describe DSL::Loader do
       end
     end
 
-    it 'should return Locations that are correctly know
+    it 'should return Locations that correctly know
         about the Locations they are remotely connected to' do
       locations.each do |location|
         location.connected_locations.should == location.remote_locations
       end
     end
   end
-  
+
   describe 'when parsing a Location that includes an Item' do
     let(:data) do
       lambda do
@@ -173,26 +176,5 @@ describe DSL::Loader do
 
   end
 
-  describe 'when parsing a Location that does not allow one to return' do
-    let(:data) do
-      lambda do
-        
-        location :hell do
-          transition { blocked }   
-        end
-
-      end
-    end
-
-    let(:loc) { parse(data).first }
-
-    it 'returns a Location whose transition is disabled' do
-      transition = loc.transitions.first
-
-      transition.from.should == :any
-      transition.to.should == loc
-      transition.allowed.should be_false
-    end
-  
-  end
 end
+

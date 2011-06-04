@@ -4,6 +4,7 @@ require 'shared/item_container'
 require 'shared/action_container'
 require 'shared/game_context_provider'
 require 'shared/value_container'
+require 'shared/transition_node'
 require 'spec_helper'
 
 describe Location do
@@ -11,6 +12,7 @@ describe Location do
   it_behaves_like 'an ActionContainer'
   it_behaves_like 'a GameContextProvider'
   it_behaves_like 'a ValueContainer'
+  it_behaves_like 'a TransitionNode'
   it_behaves_like 'a GameObject'
 
   let(:location) { Location.new }
@@ -24,15 +26,17 @@ describe Location do
       location.parent_location_name.should be_nil
     end
 
-    it 'has a default transition state' do
-       tran = location.transitions.first
-       
-       tran.from.should == :any
-       tran.to.should === location
-       tran.text.should be_nil
-       tran.allowed.should be_true
+    it 'has no transition state' do
+       location.transitions.should be_empty
     end
 
+    it 'allows transition from :any location' do
+      location.allows_transition_from?(:any).should be_true
+    end
+
+    it 'allows transition from nil location' do
+      location.allows_transition_from?(nil).should be_true
+    end
   end
 
   context 'when the parent location is set' do

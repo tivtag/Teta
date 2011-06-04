@@ -6,6 +6,23 @@ module RbReadline
   end
 end
 
+module Kernel
+  alias :old_puts :puts
+
+  def puts(dirty_text=nil)
+    if dirty_text.nil? then
+      old_puts
+    else
+      lines = dirty_text
+        .split("\n")
+        .map {|line| line.strip }
+
+      text = lines.join "\n"
+      old_puts text
+    end
+  end
+end
+
 module InputOutput
   def read_input
     begin
@@ -17,12 +34,7 @@ module InputOutput
   end
 
   def print_text(dirty_text)
-    if not dirty_text.nil? then
-      lines = dirty_text.split("\n").map {|line| line.strip }
-      text = lines.join "\n"
-    
-      puts text
-    end
+    puts dirty_text
   end
 end
 

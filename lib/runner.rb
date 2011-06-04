@@ -63,7 +63,6 @@ class Runner < GameContext
 
       add_action :changechapter do |index|
         change_to_chapter index
-        print_location
       end
     end
   end
@@ -79,6 +78,7 @@ class Runner < GameContext
   def change_to_chapter(index)
     @locations = parse_file "#{STORY_FOLDER}/chapter_#{index}.rb"
     @location = nil
+    @previous_location = nil
 
     change_location locations.first
   end
@@ -116,14 +116,14 @@ private
 
   def change_location(loc)
     @previous_location = @location
-
     @location = loc
     setup_location
 
-    transition = @location.find_transition_from(@previous_location)
+    transition = @location.transition_from(@previous_location)
     if transition != nil then
-      transition.enter()
-      puts transition.text unless transition.text.nil?
+      puts transition.text unless transition==true or transition.text.nil?
+    else
+      throw "Transition from #{previous_location} to #{next_location} not possible."
     end
   end
 

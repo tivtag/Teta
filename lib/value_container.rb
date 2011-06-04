@@ -18,5 +18,9 @@ module ValueContainer
     @values.delete key
   end
 
+  def get(key)
+    @values[key]
+  end
+
   alias :itis :has_value?
 end
