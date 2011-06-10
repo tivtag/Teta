@@ -9,7 +9,7 @@ class MusicBox
   FADE_IN_TIME = 4
 
   @@current = nil
-  @@current_path = nil
+  @@current_name = nil
 
   class << self
 
@@ -24,45 +24,22 @@ class MusicBox
       @@initialized = true
     end
   
-    def play(path)
-      if not @@initialized or path.nil? then
+    def play(name)
+      if not @@initialized or name.nil? or name == @@current_name then
         return nil
       end
 
-      if path == @@current_path then
-        return
-      end
-
       Thread.new() do
-        # Load
-        real_path = sanitize_path path
-
-        music = SDL::Mixer::LoadMUS( real_path )
-        if music.to_ptr.null?
-          puts "ERROR: Could not load music: #{SDL::GetError()}"
-          return nil
+        begin
+          @@current = play_music (load_music (sanitize name))
+          @@current_name = name
+        rescue Exception => e
+          puts "Music Error - #{e}"
         end
-
-        # Fade Out
-        if @@current != nil then
-          SDL::Mixer::FadeOutMusic( FADE_OUT_TIME * 1000 )
-          sleep FADE_OUT_TIME 
-          @@current = nil
-        end
-
-        # Play
-        if SDL::Mixer::FadeInMusic( music.to_ptr, -1, FADE_IN_TIME * 1000 ) == -1
-          puts "ERROR: Could not play music: #{SDL::GetError()}"
-          return nil
-        end
-
-        @@current = music
-        @@current_path = path
       end
-    
     end
 
-    def sanitize_path(path)
+    def sanitize(path)
       if not path.include?('/') then
         path = MUSIC_PATH + path
       end
@@ -78,6 +55,32 @@ class MusicBox
       end
 
       full_path
+    end
+
+  private
+    def load_music(path)
+      music = SDL::Mixer::LoadMUS(path)
+      if music.to_ptr.null?
+        raise "Load failed - #{SDL::GetError()}"
+      end
+      music
+    end
+
+    def fade_out
+      if @@current != nil then
+        SDL::Mixer::FadeOutMusic( FADE_OUT_TIME * 1000 )
+        sleep FADE_OUT_TIME 
+        @@current = nil
+      end
+    end
+
+    def play_music(music)
+      fade_out
+
+      if SDL::Mixer::FadeInMusic( music.to_ptr, -1, FADE_IN_TIME * 1000 ) == -1
+        raise "Play failed - #{SDL::GetError()}"
+      end
+      music
     end
 
   end
