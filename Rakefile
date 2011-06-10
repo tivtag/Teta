@@ -4,7 +4,7 @@ begin
   require 'metric_fu'
 
   MetricFu::Configuration.run do |config|
-    config.metrics = [:churn, :flog, :flay, :reek, :roodi, :hotspots]
+    config.metrics -= [:rcov]
   end
 
 rescue LoadError

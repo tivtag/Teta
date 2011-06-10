@@ -13,9 +13,9 @@ module Kernel
     if dirty_text.nil? then
       old_puts
     else
-      lines = dirty_text
-        .split("\n")
-        .map {|line| line.strip }
+      lines = dirty_text.
+        split("\n").
+        map {|line| line.strip }
 
       text = lines.join "\n"
       old_puts text
