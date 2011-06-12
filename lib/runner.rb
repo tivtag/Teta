@@ -28,6 +28,32 @@ class Runner < GameContext
     @help    = HelpSystem.new
     @running = true
 
+    init_actions
+  end
+
+  def run
+    print_location
+
+    while @running do
+      step
+    end
+  end
+
+  def change_to_chapter(index)
+    @locations = parse_file "#{STORY_FOLDER}/chapter_#{index}.rb"
+    @location = nil
+    @previous_location = nil
+
+    change_location locations.first
+  end
+
+  def die(reason = 'You died..')
+     puts reason
+     @running = false
+  end
+
+private
+  def init_actions
     add_action :q, :quit, :exit do
       @running = false
     end
@@ -67,28 +93,6 @@ class Runner < GameContext
     end
   end
 
-  def run
-    print_location
-
-    while @running do
-      step
-    end
-  end
-
-  def change_to_chapter(index)
-    @locations = parse_file "#{STORY_FOLDER}/chapter_#{index}.rb"
-    @location = nil
-    @previous_location = nil
-
-    change_location locations.first
-  end
-
-  def die(reason = 'You died..')
-     puts reason
-     @running = false
-  end
-
-private
   def step
       handle read_input
   end
