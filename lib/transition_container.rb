@@ -3,7 +3,7 @@ require_relative 'transition'
 module TransitionContainer
   attr_reader :transitions
 
-  def initialize()
+  def initialize
     @transitions = []
     
     super 
@@ -26,13 +26,13 @@ module TransitionContainer
     t
   end
 
-  def disallow_transition()
+  def disallow_transition
     for_all_transitions do
       allowed = false
     end
   end
 
-  def allow_transition()
+  def allow_transition
     for_all_transitions do
       allowed = true
     end
@@ -63,6 +63,16 @@ module TransitionContainer
     else
        @transitions.find {|t| t.has_node? node}
     end 
+  end
+
+  def find_allowed_transition_to(node)
+    transition = find_transition node
+
+    unless transition.is_allowed?(self, node)
+      transition = nil
+    end 
+
+    transition
   end
 
 end

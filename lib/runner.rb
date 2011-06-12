@@ -104,7 +104,7 @@ private
       action = entries.first.intern
       args   = entries[1..entries.length]
    
-      if not handle_action(action, args) then
+      unless handle_action(action, args)
         puts "Huh..?"
       end
     end
@@ -115,7 +115,7 @@ private
   end
 
   def print_location  
-    print_text @location.description 
+    puts @location.description 
   end
 
   def change_location(loc)

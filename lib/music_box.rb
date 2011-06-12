@@ -40,7 +40,7 @@ class MusicBox
     end
 
     def sanitize(path)
-      if not path.include?('/') then
+      unless path.include?('/')
         path = MUSIC_PATH + path
       end
         

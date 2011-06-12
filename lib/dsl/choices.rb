@@ -6,12 +6,8 @@ module DSL
     puts text
     input = read_input.to_sym
 
-    action = actions[input]
+    action = actions[input] || actions[:other]
     
-    if action.nil? then
-      action = actions[:other]
-    end
-
     if action.nil? then
       unknown
     else

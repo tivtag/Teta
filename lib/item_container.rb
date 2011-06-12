@@ -42,7 +42,6 @@ module ItemContainer
   end
 
   def remove_items(names = nil)
-
      if names.nil? then
         removed_items = @items.clone
         @items.clear

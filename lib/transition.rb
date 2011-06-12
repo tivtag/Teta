@@ -9,7 +9,7 @@ class Transition
   attr_accessor :allowed
   attr_accessor :text 
   
-  def initialize()
+  def initialize
     @walk_events = []
     
     @allowed = true
@@ -25,7 +25,7 @@ class Transition
     self.allowed and from.allows_leave and to.allows_entry
   end
 
-  def context()
+  def context
     @to.context
   end
 
@@ -35,12 +35,12 @@ class Transition
     @walk_events.each {|e| self.instance_exec(from, to, &e) }
   end
 
-  def notify()
+  def notify
     @walk_count = @walk_count + 1
   end
 
   # DSL hooks
-  def blocked()
+  def blocked
     @allowed = false
   end
   alias :block :blocked

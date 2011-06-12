@@ -32,9 +32,5 @@ module InputOutput
       ""
     end
   end
-
-  def print_text(dirty_text)
-    puts dirty_text
-  end
 end
 

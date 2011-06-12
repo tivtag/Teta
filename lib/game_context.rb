@@ -5,7 +5,7 @@ class GameContext
   attr_accessor :player
   attr_reader :item_factory
 
-  def initialize()
+  def initialize
     @item_factory = ItemFactory.new()
   end 
 

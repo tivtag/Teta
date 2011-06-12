@@ -66,17 +66,10 @@ class Location < GameObject
   end
 
   def transition_to(location)
-    if location.nil? then
-      return nil
-    end
-
-    transition = location.find_transition self
+    return nil if location.nil?
+    transition = self.find_allowed_transition_to location
     
-    if transition != nil then
-      if not transition.is_allowed?(self, location) then
-        return nil
-      end      
-
+    if transition then
       self.leave(location, transition) 
       transition.walk(self, location)
       location.enter(self, transition)
@@ -111,10 +104,10 @@ class Location < GameObject
      symbol = symbol.intern
 
      if symbol == :all then
-       items = remove_items()
+       items = remove_items
        player.add_items(items)
      else
-       item = remove_item(symbol)
+       item = remove_item symbol
        
        if item != nil then
          player.add_item(item)

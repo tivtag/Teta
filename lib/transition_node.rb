@@ -3,7 +3,7 @@ module TransitionNode
  
   attr_reader :allows_entry, :allows_leave
 
-  def initialize()
+  def initialize
     @enter_events = []
     @leave_events = []
 
