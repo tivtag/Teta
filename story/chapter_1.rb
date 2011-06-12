@@ -22,7 +22,6 @@ location :gate do
   desc "The gate is closed. You can see a toggle [switch]."
  
   remote_location :garden
-  remote_location :manor
 
   action :open do
     puts "As hard as you try.. the gate won't open. You're trapped."
@@ -66,10 +65,8 @@ location :manor do
   end
 
   remote_location :foyer do
-    transition do
-      on_enter do
-        music 'night'
-      end
+    on_enter do
+      music 'night'
     end
   end
 end

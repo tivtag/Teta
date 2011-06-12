@@ -87,8 +87,9 @@ private
         MusicBox::play name
       end
 
-      add_action :changechapter do |index|
+      add_action :cc, :changechapter do |index|
         change_to_chapter index
+        print_location
       end
     end
   end

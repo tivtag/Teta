@@ -173,7 +173,57 @@ describe DSL::Loader do
       its(:name)        { should == :coin }
       its(:description) { should == 'A silver coin.' }
     end
+  end
 
+  describe 'when parsing a Location plus two remote Locations' do
+    let(:data) do
+      lambda do
+        location :main do
+          remote_location :rem_1
+          remote_location :rem_2
+        end
+      end
+    end
+
+    let(:locations) { parse(data) }
+    let(:main) { locations.first }
+    let(:rem_1) { locations.at(1) }
+    let(:rem_2) { locations.last }
+
+    it 'returns three Locations' do
+      locations.should have(3).items
+    end
+
+    describe 'returns a main Location that' do
+      it 'has two remote Locations' do
+        main.remote_locations.should == [rem_1, rem_2]
+      end
+
+      it 'has no child Locations' do
+        main.child_locations.should be_empty
+      end
+
+      it 'has no parent location' do
+        main.parent_location.should be_nil
+      end
+    end
+
+    describe 'returns remote Locations that' do
+      it 'are not connected to each-other' do
+        rem_1.connected_locations.should == [main]
+        rem_2.connected_locations.should == [main]
+      end
+
+      it 'are remotely connected to the parent' do
+        rem_1.remote_locations.should == [main]
+        rem_2.remote_locations.should == [main]
+      end
+
+      it 'have no parents' do
+        rem_1.parent_location.should be_nil
+        rem_2.parent_location.should be_nil
+      end
+    end
   end
 
 end

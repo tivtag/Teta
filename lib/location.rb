@@ -26,13 +26,13 @@ class Location < GameObject
 
   def connected_locations
     locations = []    
- 
     if parent_location != nil then
       locations << parent_location if parent_location.allows_transition_from? self
     end
 
-    locations |= child_locations.find_all {|l| l.allows_transition_from? self}
-    locations |= remote_locations.find_all {|l| l.allows_transition_from? self}
+    locations += child_locations.find_all {|l| l.allows_transition_from? self}
+    locations += remote_locations.find_all {|l| l.allows_transition_from? self}
+    locations
   end
 
   def unlock_location(named)
