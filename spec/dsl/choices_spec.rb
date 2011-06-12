@@ -8,7 +8,7 @@ class ChoicesContextMock
   attr_accessor :printed_text
   attr_accessor :unknown_called
 
-  def println(text)
+  def puts(text)
     @printed_text = text 
   end
 

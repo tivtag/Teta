@@ -3,7 +3,7 @@ module DSL
   module Choices
 
   def choice(text, actions)
-    println text
+    puts text
     input = read_input.to_sym
 
     action = actions[input]

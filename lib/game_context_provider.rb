@@ -20,10 +20,6 @@ module GameContextProvider
     puts 'Huh..?'
   end
 
-  def println(text)
-    context.print_text text
-  end
-
   def music(name)
      MusicBox.play name
   end
