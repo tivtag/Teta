@@ -2,10 +2,10 @@
 location :road do
 
   desc "June 27 1926 - 11 P.M.
-        At this strange night not even the moon dares to show itself - only half-diffunct street lights are trying to illuminate the chuckholed country road.
+        At this strange night not even the [moon] dares to show itself - only half-diffunct street [lights] are trying to illuminate the chuckholed country road.
        
-        Why are you here at this time? To find answers. To find out why they had to die. As you gaze into far distance your hope of finding what you seek comes nearer.
-        The old [manor] once was owned by your great-grandparents. You hoped to renovate it after it stood empty for atleast two generations.
+        Why are you here at this time? To find answers. To find out why they had to die. As you gaze into the distance you feel more at ease with yourself.
+        It's the old [manor] of your great-grandparent which just became distinguishable. You hoped to renovate it after it stood empty for atleast two generations.
         If you just had known that peculiar reasons earlier.."
    
    on_enter do
@@ -14,7 +14,10 @@ location :road do
 
      give_new_item :key, 'A large rusty key. It mimics a snake head.'
    end
-   
+
+   poi :moon, "As hard as you look around - you still don't manage to locate the moon on the sky. Where is it hiding? Hopefully behind those thick cloud layers."
+   poi :lights, "Electrical Street Lights. New, yet already damaged. Electricity is a pretty new concept for the common folk."
+
    remote_location :manor do
      transition do
         desc 'You approach the manor with haste as the rain is getting stronger. You must find shelter soon.'
@@ -24,9 +27,11 @@ end
 
 location :manor do
 
-  desc 'Large ivy-glad stone walls are surrounding the old wooden building.
+  desc 'Large ivy-glad stone [walls] are surrounding the old wooden building.
         The only viable way to get into the inner-ring of the manor is the large iron [gate].' 
-	
+
+  poi :walls, 'It is said that those walls were build even earlier than the manor itself.'
+
   location :gate do
      desc "A large with snakes decorated [lock] is preventing you from [open]ing the [gate].
            Havn't you gotten this [key] in your pockets?"
@@ -42,13 +47,11 @@ location :manor do
      end
 
      action :take do |item|
-
         if item.to_sym  == :key then
           puts "As hard as you try.. the key won't move. It snapped."
         else
           unknown
         end   
-
      end
 
      action :open do |obj|

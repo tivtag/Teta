@@ -29,8 +29,16 @@ module Mechanics
     end
 
     def lookat_poi(name)
-      # NYI
-      nil
+      poi = @location.find_poi_named_like name
+
+      if poi then
+        if poi.description then
+          puts poi.description
+        end
+        poi
+      else
+        nil
+      end
     end
 
   end
