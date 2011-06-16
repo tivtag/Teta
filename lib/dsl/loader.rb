@@ -8,6 +8,20 @@ module DSL
   @@locations = []
   @@obj_stack = []
   @@item_factory = ItemFactory.new
+  
+  def parse_file(fileName)
+    clean_loader
+
+    load fileName
+    finish_parse 
+  end
+  
+  def parse(block)
+    clean_loader
+
+    block.call
+    finish_parse
+  end
 
   def current_obj
     @@obj_stack.last
@@ -122,16 +136,6 @@ module DSL
 
   def action(symbol, &block)
     current_obj.add_action(symbol, &block)
-  end
-
-  def parse_file(fileName)
-    load fileName
-    finish_parse 
-  end
-  
-  def parse(block)
-    block.call
-    finish_parse
   end
 
   def find_location_named(name)

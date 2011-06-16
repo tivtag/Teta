@@ -37,5 +37,6 @@ module TransitionNode
     @allows_entry = true
   end
 
-  alias :block :blocked
+  alias :block! :blocked
 end
+

@@ -5,7 +5,6 @@ include DSL::Loader
 describe DSL::Loader do
  
   describe 'when parsing a single simple Location' do
-     
     let(:data) do
        lambda do
          location :town do
@@ -224,6 +223,41 @@ describe DSL::Loader do
         rem_2.parent_location.should be_nil
       end
     end
+  end
+
+  describe 'when parsing a Location that has various Points of Interest' do
+
+    let(:data) do
+      lambda do
+        location :wall do
+          poi :clock, 'An old wooden clock.'
+          poi :painting, 'The painting is plain black.' 
+        end
+      end
+    end
+
+    let(:locations) { parse(data) }
+    subject { locations.first }
+
+    it 'created only one Location' do
+      locations.length.should == 1
+    end
+  end
+
+  describe 'when parsing an errornous script' do
+
+    let(:data) do
+      lambda do
+        location :wall do
+          blbbla_unknown_method
+        end
+      end
+    end
+
+    it 'raises an error' do
+      lambda { parse(data) }.should raise_error
+    end
+
   end
 
 end

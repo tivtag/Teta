@@ -5,7 +5,7 @@ include DSL::Loader
 describe DSL::Loader, 'Transitions' do
 
   describe 'when parsing a Location that does not allow one to return' do
-    let(:data) do
+    let!(:data) do
       lambda do
         location :hell do
           blocked   
@@ -13,16 +13,20 @@ describe DSL::Loader, 'Transitions' do
       end
     end
 
-    let(:loc) { parse(data).first }
+    let!(:hell) { parse(data).first }
 
-    it 'return a Location that does not allow entry' do
-      loc.allows_entry.should be_false
+    it 'returns a Location that does not allow entry' do
+      hell.allows_entry.should be_false
+    end
+
+    it 'returns a Location that allows leave' do
+      hell.allows_leave.should be_true
     end
 
     it 'returns a Location with no transitions' do
-      loc.transitions.should be_empty
+      hell.transitions.should be_empty
     end
-  
+
   end
 
   describe 'when parsing Locations which are partially blocked' do
