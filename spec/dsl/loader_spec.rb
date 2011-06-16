@@ -226,7 +226,6 @@ describe DSL::Loader do
   end
 
   describe 'when parsing a Location that has various Points of Interest' do
-
     let(:data) do
       lambda do
         location :wall do
@@ -237,10 +236,25 @@ describe DSL::Loader do
     end
 
     let(:locations) { parse(data) }
-    subject { locations.first }
+    let(:loc) { locations.first }
 
     it 'created only one Location' do
       locations.length.should == 1
+    end
+
+    describe 'returns a Location that' do
+      it 'has all pois' do
+        loc.pois.should have(2).items
+      end
+
+      it 'has pois with the correct names and descriptions' do
+        pois = loc.pois.map {|poi| [poi.name, poi.description]}
+
+        pois.should == [
+          [:clock,    'An old wooden clock.'], 
+          [:painting, 'The painting is plain black.']
+        ]
+      end
     end
   end
 

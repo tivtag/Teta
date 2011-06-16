@@ -4,6 +4,7 @@ require_relative 'item_container'
 require_relative 'action_container'
 require_relative 'value_container'
 require_relative 'transition_container'
+require_relative 'poi_container'
 require_relative 'game_context_provider'
 require_relative 'string_ext'
 
@@ -12,6 +13,7 @@ class Location < GameObject
   include ItemContainer
   include ActionContainer
   include ValueContainer
+  include PoiContainer
   include TransitionContainer
   include TransitionNode
 

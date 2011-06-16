@@ -138,6 +138,14 @@ module DSL
     current_obj.add_action(symbol, &block)
   end
 
+  def poi(name, desc)
+    p = GameObject.new()
+    p.name = name
+    p.description = desc
+
+    current_obj.add_poi p
+  end
+
   def find_location_named(name)
     @@locations.detect do |loc|
       loc.name == name
