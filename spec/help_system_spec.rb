@@ -6,14 +6,26 @@ describe HelpSystem do
   let(:help) { HelpSystem.new }
   subject { help }
 
-  it { should have_command(:all) }
-  it { should have_command(:inv) }
-  it { should have_command(:help) }
-  it { should have_command(:goto) }
-  it { should have_command(:go) }
-  it { should have_command(:quit) }
-  it { should have_command(:look) }
-  it { should have_command(:use) }
-  it { should have_command(:cls) }
+  cmds = %w[all inv help goto go quit look use cls].
+    map(&:to_sym)
+
+  it 'should print the help overview when asking for help about no topic' do
+      $stdout.should_receive(:puts).at_least(cmds.length).times
+      help.call ''
+  end
+
+  it 'should print an excuse when asking for help about an unknown topic' do
+      $stdout.should_receive(:puts).at_least(:once)
+      help.call 'unknown'
+  end
+
+  cmds.each do|cmd|
+    it { should have_command(cmd) }
+
+    it "should print text when asking help about :#{cmd}" do
+      $stdout.should_receive(:puts).at_least(:once)
+      help.call cmd
+    end
+  end
 
 end
