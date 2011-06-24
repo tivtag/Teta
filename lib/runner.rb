@@ -1,4 +1,5 @@
 require_relative 'input_output'
+require_relative 'system_helper'
 require_relative 'location'
 require_relative 'help_system'
 require_relative 'action_container'
@@ -79,7 +80,7 @@ private
     end
  
     add_action :cls do
-      system('clear') 
+      SystemHelper::clear
     end
 
     if DEBUG then
