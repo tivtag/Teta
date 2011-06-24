@@ -23,7 +23,7 @@ class HelpSystem
         puts 'Command List: '
         puts 'quit        - Quits this game.'
         puts 'goto [name] - Moves to the location that has the given [name].'
-        puts 'go back     - Movies to the previous location.'
+        puts 'go back     - Moves to the previous location.'
         puts 'inv         - Shows the content of your inventory.'
         puts 'use [obj]   - Uses an object in the current location or your inventory.'
         puts 'look [name] - Looks at the inventory object with the given [name].'
