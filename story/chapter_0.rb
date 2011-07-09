@@ -32,6 +32,8 @@ location :manor do
 
   poi :walls, 'It is said that those walls were build even earlier than the manor itself.'
 
+  on_enter { block }
+
   location :gate do
      desc "A large with snakes decorated [lock] is preventing you from [open]ing the [gate].
            Havn't you gotten this [key] in your pockets?"
@@ -57,7 +59,7 @@ location :manor do
      action :open do |obj|
        if obj == 'gate' then
          if itis :unlocked then
-           if not itis :open then
+           if itisnt :open then
              set :open
              puts 'The pathway to the [garden] opens.'
 
@@ -77,8 +79,10 @@ location :manor do
         if obj == 'gate' then
           if itis :open then
             unset :open
-            puts 'You close the gate to the family manion again. Do you give up?'   
+            puts 'You close the gate to the family manion. Do you give up?'
+
             lock_location :garden
+            unlock_location :home
           else
             puts "You can't just close a gate twice."
           end
@@ -92,6 +96,17 @@ location :manor do
 
        on_enter do
          change_to_chapter 1
+       end
+     end
+
+     location :home do
+       blocked
+
+       on_enter do
+         puts 'You flee from the manor. Yet a shadow is lurking behind you even closer. You are out of breath. And must stop.'
+         puts "The shadow speaks: 'This is a place of no return. Don't attempt to flee your destiny in your next life. Rest in Peace.'"
+
+         die
        end
      end
   end

@@ -2,3 +2,4 @@
 *.swo
 coverage
 tmp
+Gemfile.lock

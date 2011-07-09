@@ -49,7 +49,11 @@ class Runner < GameContext
   end
 
   def die(reason = 'You died..')
+     puts
      puts reason
+
+     puts 'Press Enter to exit..'
+     gets
      @running = false
   end
 
