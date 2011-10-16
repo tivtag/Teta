@@ -11,11 +11,21 @@ It uses:
   * simplecov to calculate spec coverage
 
 
-LINUX installation
+Installation:
+1. Install native SDL libraries
+
+LINUX:
 apt-get install libsdl1.2-dev
+
+Mac OS X:
+Install Homebrew if you don't already have it (see http://mxcl.github.com/homebrew/)
+brew install sdl_sound
+brew install sdl_mixer
+
+2. Install the required gems:
+
 gem install bundle
 bundle install
-
 
 Music:
 night.ogg - Quinn's Song: First Night 

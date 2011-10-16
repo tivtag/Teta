@@ -100,11 +100,11 @@ private
   end
 
   def step
-      handle read_input
+    handle read_input
   end
 
   def handle(input)
-    entries = input.downcase.split ' '
+    entries = input.downcase.preparse.split ' '
    
     if entries.length > 0 then
       action = entries.first.intern
