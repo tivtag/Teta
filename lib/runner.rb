@@ -100,7 +100,7 @@ private
   end
 
   def step
-      handle read_input
+    handle read_input
   end
 
   def handle(input)
