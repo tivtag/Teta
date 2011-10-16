@@ -16,6 +16,8 @@ apt-get install libsdl1.2-dev
 gem install bundle
 bundle install
 
+Starting the game:
+ruby bin/Teta
 
 Music:
 night.ogg - Quinn's Song: First Night 
