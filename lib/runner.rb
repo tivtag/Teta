@@ -79,7 +79,7 @@ private
       goto location
     end
 
-    add_action :l, :look, :lookat do |obj| 
+    add_action :l, :look, :lookat, :examine do |obj| 
       lookat obj
     end
  
