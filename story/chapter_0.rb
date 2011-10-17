@@ -15,8 +15,9 @@ location :road do
      give_new_item :key, 'A large rusty key. It mimics a snake head.'
    end
 
-   poi :moon, "As hard as you look around - you still don't manage to locate the moon on the sky. Where is it hiding? Hopefully behind those thick cloud layers."
-   poi :lights, "Electrical Street Lights. New, yet already damaged. Electricity is a pretty new concept for the common folk."
+   poi :moon,   "As hard as you look around - you still don't manage to locate the moon on the sky. Where is it hiding? Hopefully behind those thick cloud layers."
+   poi :lights, "Electrical street lights. New, yet already damaged. Electricity is a pretty new concept for the common folk."
+   poi :manor,  "The old manor - still tiny in the distance - something within you commands you move towards it."
 
    remote_location :manor do
      transition do
