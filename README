@@ -27,12 +27,14 @@ brew install sdl_mixer
 gem install bundle
 bundle install
 
+
 Music:
 night.ogg - Quinn's Song: First Night 
 Kevin MacLeod (incompetech.com) Licensed under Creative Commons "Attribution 3.0" http://creativecommons.org/licenses/by/3.0/"
 
 rain.mp3 
 Arctura (http://www.freesound.org/samplesViewSingle.php?id=39825)
+
 
 This is free software.
 by Paul Ennemoser
