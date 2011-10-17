@@ -21,18 +21,18 @@ class HelpSystem
     class << self    
       def all
         puts 'Command List: '
-        puts 'quit        - Quits this game.'
-        puts 'goto [name] - Moves to the location that has the given [name].'
-        puts 'go back     - Moves to the previous location.'
-        puts 'inv         - Shows the content of your inventory.'
-        puts 'use [obj]   - Uses an object in the current location or your inventory.'
-        puts 'look [name] - Looks at the inventory object with the given [name].'
-        puts 'cls         - Clears the screen of text.'
-        puts 'help [cmd]  - Shows extended help about the given [command].'
+        puts 'quit        - Quits the game :('
+        puts 'goto [name] - Moves to location with [name].'
+        puts 'go back     - Moves to previous location.'
+        puts 'inv         - Shows inventory content.'
+        puts 'use [name]  - Uses object with [name].'
+        puts 'look [name] - Looks at object with [name].'
+        puts 'cls         - Clears screen. All empty!'
+        puts 'help [cmd]  - Shows extended help about the [command].'
       end
 
       def quit
-        puts 'Quits this game. Progress is NOT saved. /sad'
+        puts 'Quits the game. Progress is NOT saved. :('
       end
 
       def go
