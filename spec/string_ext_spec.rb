@@ -29,16 +29,4 @@ describe String, "Extensions" do
     end
   end
 
-  describe '#preparse' do
-    
-    it "should substitute 'look at' with 'look'" do
-      "look at key".preparse.should == "look key"
-    end
-    
-    it "should substitute 'examine' with 'look" do
-      "examine key".preparse.should == "look key"
-    end
-    
-  end
-
 end

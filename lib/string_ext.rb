@@ -14,12 +14,6 @@ class String
 
     entries
   end
-  
-  def preparse
-    self.gsub! /^look at/, 'look'
-    self.gsub! /^examine/, 'look'
-    self
-  end
 
 end
 

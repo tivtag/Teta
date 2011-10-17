@@ -104,7 +104,7 @@ private
   end
 
   def handle(input)
-    entries = input.downcase.preparse.split ' '
+    entries = input.downcase.split ' '
    
     if entries.length > 0 then
       action = entries.first.intern

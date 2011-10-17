@@ -28,5 +28,5 @@ describe Runner do
       it { should_not have_action(:changechapter) }
     end
   end
-  
+
 end
