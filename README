@@ -1,6 +1,6 @@
 Teta is meant to become a Text Adventure at some point in the future
 that uses an Internal Domain Specific Language to describe the game
-data.
+data. Learning Ruby by Doing.
 
 It uses:
   * ruby-sdl-ffi to play musicV
@@ -11,7 +11,7 @@ It uses:
   * simplecov to calculate spec coverage
 
 
-Installation:
+## Installation ##
 1. Install native SDL libraries
 
 LINUX:
@@ -28,6 +28,13 @@ gem install bundle
 bundle install
 
 
+## Code Specifications + Metrics ##
+
+Run specs  : rspec spec
+Run metrics: rake metrics:all
+
+
+## Credits ##
 Music:
 night.ogg - Quinn's Song: First Night 
 Kevin MacLeod (incompetech.com) Licensed under Creative Commons "Attribution 3.0" http://creativecommons.org/licenses/by/3.0/"
