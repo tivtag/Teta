@@ -89,6 +89,14 @@ class Location < GameObject
     end
   end
 
+  # Makes sure that all remote locations
+  # are remotely connected to this location.
+  def mirror_remote_locations
+    remote_locations.each do |remote_location|
+      remote_location.remote_locations.append_unique! self
+    end
+  end
+
   def to_s
     "|#{name} Parent = {#{if parent_location.nil? then "none" else parent_location.name end}}|\n"
   end

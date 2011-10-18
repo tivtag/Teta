@@ -1,5 +1,6 @@
 require_relative '../location'
 require_relative '../item_factory'
+require_relative '../array_ext'
 
 module DSL 
   module Loader
@@ -174,18 +175,8 @@ module DSL
     end
   end
 
-  # Makes sure that all remote locations
-  # are connected to eachother.
   def mirror_remote_locations
-    @@locations.each do |location|
-      location.remote_locations.each do |remote_location|
- 
-        if not remote_location.remote_locations.include?(location) then
-          remote_location.remote_locations << location
-        end
-
-      end
-    end
+    @@locations.each {|location| location.mirror_remote_locations }
   end
 
   def finish_parse
