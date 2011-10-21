@@ -33,8 +33,6 @@ class Runner < GameContext
   end
 
   def run
-    print_location
-
     while @running do
       step
     end
@@ -94,7 +92,6 @@ private
 
       add_action :cc, :changechapter do |index|
         change_to_chapter index
-        print_location
       end
     end
   end
@@ -120,7 +117,8 @@ private
     location.eval_action_safe(action, *args) or self.eval_action_safe(action, *args)
   end
 
-  def print_location  
+  def print_location
+    puts
     puts @location.description 
   end
 
@@ -135,6 +133,8 @@ private
     else
       throw "Transition from #{previous_location} to #{next_location} not possible."
     end
+
+    print_location
   end
 
   def setup_location

@@ -89,6 +89,10 @@ class Location < GameObject
     end
   end
 
+  def find_connected(name)
+     connected_locations.find {|child| child.name.to_s.start_with_any? name } 
+  end
+
   # Makes sure that all remote locations
   # are remotely connected to this location.
   def mirror_remote_locations
