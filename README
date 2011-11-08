@@ -15,17 +15,22 @@ It uses:
 1. Install native SDL libraries
 
 LINUX:
-apt-get install libsdl1.2-dev
+  apt-get install libsdl1.2-dev
 
 Mac OS X:
-Install Homebrew if you don't already have it (see http://mxcl.github.com/homebrew/)
-brew install sdl_sound
-brew install sdl_mixer
+  Install Homebrew if you don't already have it (see http://mxcl.github.com/homebrew/)
+  brew install sdl_sound
+  brew install sdl_mixer
 
-2. Install the required gems:
+WINDOWS:
+  SDL.dll from http://www.libsdl.org/download-1.2.php
+  SDL_mixer.dll and smpeg.dll from http://www.libsdl.org/projects/SDL_mixer/
 
-gem install bundle
-bundle install
+
+2. Install required gems:
+
+gem install bundler
+bundle install --system
 
 
 ## Code Specifications + Metrics ##
