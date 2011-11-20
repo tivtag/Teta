@@ -85,7 +85,7 @@ location :manor do
             lock_location :garden
             unlock_location :home
           else
-            puts "You can't just close a gate twice."
+            puts "No! You can't just close a gate twice."
           end
         else
           unknown
@@ -95,9 +95,7 @@ location :manor do
      location :garden do
        blocked
 
-       on_enter do
-         change_to_chapter 1
-       end
+       on_enter { change_to_chapter 1 }
      end
 
      location :home do
@@ -105,7 +103,7 @@ location :manor do
 
        on_enter do
          puts 'You flee from the manor. Yet a shadow is lurking behind you even closer. You are out of breath. And must stop.'
-         puts "The shadow speaks: 'This is a place of no return. Don't attempt to flee your destiny in your next life. Rest in Peace.'"
+         puts "The shadow speaks: 'This is a place of no return. Don't attempt to flee your destiny in your next life. Rest in peace and.. pieces!'"
 
          die
        end
