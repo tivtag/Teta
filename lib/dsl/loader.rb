@@ -1,6 +1,7 @@
 require_relative '../location'
 require_relative '../item_factory'
 require_relative '../array_ext'
+require_relative '../strsym_eq_ext.rb'
 
 module DSL 
   module Loader

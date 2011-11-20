@@ -50,7 +50,7 @@ location :manor do
      end
 
      action :take do |item|
-        if item.to_sym  == :key then
+        if item == :key then
           puts "As hard as you try.. the key won't move. It snapped."
         else
           unknown

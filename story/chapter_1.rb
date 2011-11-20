@@ -14,7 +14,7 @@ location :garden do
   remote_location :gate
 
   action :take do |item|
-    take item.to_sym
+    take item
   end
 end
 
@@ -59,15 +59,10 @@ location :manor do
         this house that should not be uncovered ever again.   
 
         The well-sized [foyer] is infront of you."
-
-  on_enter do
-     music 'rain'
-  end
+  on_enter { music 'rain' }
 
   remote_location :foyer do
-    on_enter do
-      music 'night'
-    end
+    on_enter { music 'night' }
   end
 end
 
@@ -160,6 +155,6 @@ location :kitchen do
 end
 
 location :store_room do
-  desc 'A deserted room.'
+  desc 'A plundered storage room. Who was here?'
 end
 
