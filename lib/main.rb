@@ -12,6 +12,11 @@ puts
 runner = Runner.new
 
 if not defined?(Ocra)
-  runner.change_to_chapter 0
+  if ARGV.empty? then
+    runner.change_to_chapter 0
+  else
+    runner.load_file ARGV[0]
+  end
+
   runner.run
 end

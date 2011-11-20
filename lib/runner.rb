@@ -39,7 +39,11 @@ class Runner < GameContext
   end
 
   def change_to_chapter(index)
-    @locations = parse_file "#{STORY_FOLDER}/chapter_#{index}.rb"
+    load_file "chapter_#{index}"
+  end
+
+  def load_file(name)
+    @locations = parse_file "#{STORY_FOLDER}/#{name}.rb"
     @location = nil
     @previous_location = nil
 
