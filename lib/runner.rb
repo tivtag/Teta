@@ -33,9 +33,7 @@ class Runner < GameContext
   end
 
   def run
-    while @running do
-      step
-    end
+    step while @running
   end
 
   def change_to_chapter(index)
@@ -127,6 +125,8 @@ private
   end
 
   def change_location(loc)
+    puts caller
+
     @previous_location = @location
     @location = loc
     setup_location
