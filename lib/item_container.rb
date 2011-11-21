@@ -1,4 +1,5 @@
 require_relative 'item'
+require_relative 'strsym_eq_ext'
 
 module ItemContainer
 

@@ -2,9 +2,11 @@
 module DSL
   module Items
 
-  def remove_player(item, expected_item)
-    item = item.intern
+  def has_player_item?(item)
+    player.has_item? item
+  end
 
+  def remove_player(item, expected_item)
     if item == expected_item then
       player.remove_item item
     else

@@ -1,9 +1,8 @@
 
 location :garden do
-  desc "The garden looks strangely well cultivated. Yet you havn't ordered anyone..
-        Black and red [roses] are blooming."
+  desc "It looks strangely well cultivated. Black and red [roses] are blooming. Their strong smell makes you dizzy. The [manor] lies ahead of you, the closed [gate] behind and a water [well] to the east."
 
-  item :roses, 'Smells wonderful. How kitschy!'
+  item :roses, 'These roses have an unusual odour - not normal.'
 
   remote_location :manor do
     transition do
@@ -12,6 +11,7 @@ location :garden do
   end
 
   remote_location :gate
+  remote_location :well
 
   action :take do |item|
     take item
@@ -19,7 +19,7 @@ location :garden do
 end
 
 location :gate do
-  desc "The gate is closed. You can see a toggle [switch]."
+  desc "The gate is well closed. It won't budge. To the side of the gate you spot a toggle [switch]."
  
   remote_location :garden
 
@@ -54,10 +54,28 @@ location :gate do
   end
 end
 
-location :manor do
-  desc "The family manor - they say that there are secrets in
-        this house that should not be uncovered ever again.   
+location :well do
+  desc 'The stone well is covered with strong wooden plates.'
+  poi :plates, 'The plates are too robust to be removed with bare hands. You discover that of the plates has fist sized hole. You just might be able to drop something into it.'
 
+  action :drop do |item|
+    if has_player_item? item then
+      if remove_player item, :roses then
+        puts 'A bloom of sick vapour ascends from the depths of the well. It fully surrounds you before it disolves. G-nhh!'
+        set :flower_stench
+      else
+        puts 'Bad idea - very bad..'
+      end
+    else
+      puts "You can't drop what you don't have."
+    end
+  end
+
+end
+
+location :manor do
+  desc "Finally - the family manor - they say that there are secrets in
+        this house that should not be uncovered ever again.   
         The well-sized [foyer] is infront of you."
   on_enter { music 'rain' }
 
@@ -68,7 +86,7 @@ end
 
 location :foyer do
   desc "From the foyer various tight paths lead to the rooms of the manor.
-        Old unlit [candle]-lights are placed next to the walls. Strange.
+        Old unlit [candle]-lights are placed next to the walls. Your electronic torch better not lose its charge.
         A stenching smell of burning flesh seems to come from the [kitchen]. "
 
   action :take do |item|

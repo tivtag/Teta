@@ -12,7 +12,8 @@ location :road do
      music 'rain'
      block
 
-     give_new_item :key, 'A large rusty key. It mimics a snake head.'
+     give_new_item :key, 'A large rusty key. It mimics a snake head. You found it in your mail box just a week before this queer story started.'
+     give_new_item :electrictorch, 'Your trustworthy light source.'
    end
 
    poi :moon,   "As hard as you look around - you still don't manage to locate the moon on the sky. Where is it hiding? Hopefully behind those thick cloud layers."
@@ -95,7 +96,10 @@ location :manor do
      location :garden do
        blocked
 
-       on_enter { change_to_chapter 1 }
+       on_enter do
+         puts 'Through and through wet you finally enter the manor grounds, while suddenly with load *creaking* the gate behind you closes. You stumble forward into the garden.'
+         change_to_chapter 1 
+       end
      end
 
      location :home do
@@ -103,7 +107,7 @@ location :manor do
 
        on_enter do
          puts 'You flee from the manor. Yet a shadow is lurking behind you even closer. You are out of breath. And must stop.'
-         puts "The shadow speaks: 'This is a place of no return. Don't attempt to flee your destiny in your next life. Rest in peace and.. pieces!'"
+         puts "The shadow speaks: 'This is a place of no return. Don't attempt to flee your destiny in your next life. Rest in peace and.. pieces! A-haha!'"
 
          die
        end

@@ -29,9 +29,23 @@ module InputOutput
     begin
       Readline.readline('> ', true)
     rescue Interrupt
-      @running = false
-      ""
+      read_error
     end
+  end
+
+  # Overwrite gets to not use STD input - we don't want that when starting a specific chapter.
+  def gets
+    begin
+      Readline.readline('', false)
+    rescue Interrupt
+      read_error
+    end
+  end
+
+  private
+  def read_error
+    @running = false
+    ""
   end
 end
 

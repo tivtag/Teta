@@ -125,8 +125,6 @@ private
   end
 
   def change_location(loc)
-    puts caller
-
     @previous_location = @location
     @location = loc
     setup_location
@@ -138,7 +136,8 @@ private
       throw "Transition from #{previous_location} to #{next_location} not possible."
     end
 
-    print_location
+    # only print the location if the transition didn't change your destination
+    print_location if @location == loc
   end
 
   def setup_location
