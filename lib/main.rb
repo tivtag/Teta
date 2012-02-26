@@ -7,7 +7,6 @@ puts
 puts
 puts "Welcome to a story by P. Ennemoser. Enter 'help' at any time."
 puts '--------------------------------------------------------------'
-puts
 
 runner = Runner.new
 
