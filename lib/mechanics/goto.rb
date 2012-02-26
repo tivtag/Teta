@@ -19,10 +19,10 @@ module Mechanics
         if @previous_location && @location.connected?(@previous_location) then
           change_location @previous_location
         else
-          puts 'This is impossible!' 
+          puts "No, you can't. It's just not possible." 
         end
       else
-        puts "I can't do that."
+        goto dir
       end
     end
 
