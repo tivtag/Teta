@@ -23,19 +23,30 @@ Mac OS X:
   brew install sdl_mixer
 
 WINDOWS:
-  SDL.dll from http://www.libsdl.org/download-1.2.php
-  SDL_mixer.dll and smpeg.dll from http://www.libsdl.org/projects/SDL_mixer/
+  SDL.dll                     32-bit from http://www.libsdl.org/download-1.2.php
+  SDL_mixer.dll and smpeg.dll 32-bit from http://www.libsdl.org/projects/SDL_mixer/
+  
+  libc++-6.dll                       from http://en.sourceforge.jp/projects/sfnet_hamilton/downloads/stdcpp6/2/2.0/dev-bin/libstdc++-6.dll/
+  libgcc_s_dw2-1.dll                 from http://en.sourceforge.jp/projects/sfnet_openmarias/downloads/libgcc_s_dw2-1.dll/
+  
+  place the dlls in lib/ 
+  and in / if you want to run specs
 
 
 2. Install required gems:
 
 gem install bundler
-bundle install --system
+bundle install
 
 
-## Code Specifications + Metrics ##
+## Code Specifications ##
 
 Run specs  : rspec spec
+
+
+## Code Metrics ##
+The code metrics gem metric_fu is currently broken as of ruby 1.9.3p194.
+
 Run metrics: rake metrics:all
 
 
